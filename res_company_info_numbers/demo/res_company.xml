@@ -1,0 +1,14 @@
+<openerp>
+    <data>
+	<record id="base.main_company" model="res.company">
+		<field name="authorization_num">423423542353</field>
+		<field name="init_num">1</field>
+		<field name="final_num">10</field>
+		<field name="next_num">11</field>
+		<field name="issuance_deadline">2019-08-10</field>
+		<field name="account_key">HJF787JHD</field>
+		<field name="state">True</field>
+		<field name="footer">There is a little description about the footer</field>
+        </record>
+    </data>
+</openerp>

@@ -22,10 +22,11 @@
 #
 ##############################################################################
 {
-    "name": "account_invoice_ricardo",
+    "name": "Res Company Information Numbers",
     "summary": """
-        Short (1 phrase/line) summary of the module's purpose, used as
-        subtitle on modules listing or apps.openerp.com""",
+	Add to res company, init, final autorizathion number.
+""",
+
     "description": """
         Long description of module's purpose
     """,
@@ -37,15 +38,11 @@
                 "base",
                 "base_vat",
                 "account_accountant",
-		"res_company_info_number",
     ],
     "data": [
-        "report/report.xml",
-        "views/account_invoice_partner.xml",
-        "views/report_invoices.xml",
-        "wizards/account_invoice_partner.xml",
+        "views/res_company.xml",
     ],
     "demo": [
-        "demo/demo.xml",
+        "demo/res_company.xml",
     ],
 }
