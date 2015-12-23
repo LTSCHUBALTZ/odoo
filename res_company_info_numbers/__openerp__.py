@@ -48,6 +48,7 @@ Key Features
     "version": "0.1",
     "depends": [
                 "base",
+		"procurement",
     ],
     "data": [
         "views/res_company.xml",
