@@ -22,30 +22,33 @@
 #
 ##############################################################################
 {
-    "name": "account_invoice_ricardo",
+    "name": "Account Invoice Partner Wizard",
     "summary": """
-        Short (1 phrase/line) summary of the module's purpose, used as
-        subtitle on modules listing or apps.openerp.com""",
+Display a wizard when the new invoice report is printed.
+You can choose the partner and company specific for the
+information on the report to prit
+""",
     "description": """
-        Long description of module's purpose
+Account Invoice partner Wizard
+==============================
+
+- New report for invoice
+- Fields related with the company
+- Choose partne and company for information in the invoice report
     """,
     "author": "Disprotec SRL & Ingenieria Thinkasoft de Venezuela",
     "website": "http://www.disprotec.net",
     "category": "Accounting & Finance",
     "version": "0.1",
     "depends": [
-                "base",
-                "base_vat",
-                "account_accountant",
-		"res_company_info_number",
+	"base_vat",
+	"account_accountant",
+	"res_company_info_number",
     ],
     "data": [
         "report/report.xml",
         "views/account_invoice_partner.xml",
         "views/report_invoices.xml",
         "wizards/account_invoice_partner.xml",
-    ],
-    "demo": [
-        "demo/demo.xml",
     ],
 }
