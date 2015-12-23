@@ -17,9 +17,9 @@
                             <field name="website"/>
                         </group>
                         <group>
-                            <field name="nro_authorization"/>
-                            <field name="nro_init"/>
-                            <field name="nro_final"/>
+                            <field name="authorization_num"/>
+                            <field name="init_num"/>
+                            <field name="final_num"/>
                             <field name="issuance_deadline"/>
                             <field name="account_key"/>
                             <field name="footer"/>

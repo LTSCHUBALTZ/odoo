@@ -26,28 +26,29 @@ from openerp import models, fields, api
 
 
 class ResCompany(models.Model):
-    _inherit = 'res.company'
 
-    nro_authorization = fields.Integer(string='Nro. Authorization', size=30, required=True)
-    nro_init = fields.Integer(string='Start Number', size=10, required=True, compute='_get_number_init')
-    nro_final = fields.Integer(string='Final Number', size=10, required=True, default=1)
-    nro_next = fields.Integer(string='Next Number', size=10, required=True, compute='_get_number_next')
-    issuance_deadline = fields.Date(string='Issuance Deadline', size=10, required=True, default=fields.Date.context_today)
-    account_key = fields.Char(string='Key', size=100, required=True)
-    state = fields.Boolean(compute='_get_state', readonly=False, default=False)
-    footer = fields.Char(string='footer')
+    _inherit = "res.company"
 
-    @api.depends('nro_init')
-    def _get_number_next(self):
+    authorization_num = fields.Integer(string="Authorization Number", size=30, required=True)
+    init_num = fields.Integer(string="Start Number", size=10, required=True, compute="_get_number_init_num")
+    final_num = fields.Integer(string="Final Number", size=10, required=True, default=1)
+    next_num = fields.Integer(string="Next Number", size=10, required=True, compute="_get_number_next_num")
+    issuance_deadline = fields.Date(string="Issuance Deadline", size=10, required=True, default=fields.Date.context_today)
+    account_key = fields.Char(string="Key", size=100, required=True)
+    state = fields.Boolean(compute="_get_state", readonly=False, default=False)
+    footer = fields.Char(string="footer")
+
+    @api.depends("init_num")
+    def _get_number_next_num(self):
         for r in self:
-            r.nro_next = r.nro_init + 1
+            r.next_num = r.init_num + 1
 
-    @api.depends('nro_final')
-    def _get_number_init(self):
+    @api.depends("final_num")
+    def _get_number_init_num(self):
         for r in self:
-            r.nro_init = r.nro_final + 1
+            r.init_num = r.final_num + 1
 
-    @api.depends('issuance_deadline')
+    @api.depends("issuance_deadline")
     def _get_state(self):
         for r in self:
             r.state = False

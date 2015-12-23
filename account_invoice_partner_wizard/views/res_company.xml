@@ -8,10 +8,10 @@
         <field name="arch" type="xml">
             <xpath expr="//group[@name='logistics_grp']" position='before'>
                 <group name="account_grp2" string=' '>
-                    <field name="nro_authorization"/>
-                    <field name="nro_init"/>
-                    <field name="nro_final"/>
-                    <field name="nro_next"/>
+                    <field name="authorization_num"/>
+                    <field name="init_num"/>
+                    <field name="final_num"/>
+                    <field name="next_num"/>
                     <field name="issuance_deadline"/>
                     <field name="state"/>
                     <field name="account_key"/>

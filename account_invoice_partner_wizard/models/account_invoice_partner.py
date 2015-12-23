@@ -26,16 +26,17 @@ from openerp import models, fields, api
 
 
 class AccountInvoice(models.Model):
-    _inherit = 'account.invoice'
 
-    vat = fields.Char(related='company_id.vat', string='TAX ID', readonly=True)
-    city = fields.Char(related='company_id.city', string='City', readonly=True)
-    street = fields.Char(related='company_id.street', string='Description', readonly=True)
-    street2 = fields.Char(related='company_id.street2', string=' ', readonly=True)
-    website = fields.Char(related='company_id.website', string=' ', readonly=True)
-    nro_authorization = fields.Integer(related='company_id.nro_authorization', string='Nro. Authorization', readonly=True)
-    nro_init = fields.Integer(related='company_id.nro_init', string='Start Number', readonly=True)
-    nro_final = fields.Integer(related='company_id.nro_final', string='Final Number', readonly=True)
-    issuance_deadline = fields.Date(related='company_id.issuance_deadline', string='Issuance Deadline', readonly=True)
-    account_key = fields.Char(related='company_id.account_key', string='Key', readonly=True)
-    footer = fields.Char(related='company_id.footer', string='footer', readonly=True)
+    _inherit = "account.invoice"
+
+    vat = fields.Char(related="company_id.vat", string="TAX ID", readonly=True)
+    city = fields.Char(related="company_id.city", string="City", readonly=True)
+    street = fields.Char(related="company_id.street", string="Description", readonly=True)
+    street2 = fields.Char(related="company_id.street2", string=" ", readonly=True)
+    website = fields.Char(related="company_id.website", string=" ", readonly=True)
+    authorization_num = fields.Integer(related="company_id.authorization_num", string="Authorization Number", readonly=True)
+    init_num = fields.Integer(related="company_id.init_num", string="Start Number", readonly=True)
+    final_num = fields.Integer(related="company_id.final_num", string="Final Number", readonly=True)
+    issuance_deadline = fields.Date(related="company_id.issuance_deadline", string="Issuance Deadline", readonly=True)
+    account_key = fields.Char(related="company_id.account_key", string="Key", readonly=True)
+    footer = fields.Char(related="company_id.footer", string="footer", readonly=True)
