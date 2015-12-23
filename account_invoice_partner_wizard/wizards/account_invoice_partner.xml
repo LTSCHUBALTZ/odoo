@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record model="ir.ui.view" id="account_invoice_partner_wizard_form">
+    <field name="name">account.invoice.partner.wizard.form</field>
+    <field name="model">account.invoice.partner.wizard</field>
+    <field name="arch" type="xml">
+        <form string="Partner Info">
+          <group>
+            <group>
+                <field name="company_id"/>
+                <field name="company_vat"/>
+                <field name="company_city"/>
+                <field name="company_street"/>
+                <field name="company_street2"/>
+                <field name="company_website"/>
+            </group>
+            <group>
+                <field name="partner_id"/>
+                <field name="partner_vat"/>
+                <field name="partner_city"/>
+                <field name="partner_street"/>
+                <field name="partner_street2"/>
+                <field name="partner_website"/>
+            </group>
+          </group>    
+          <footer>
+            <button name="check_report" string="Print" type="object" default_focus="1" class="oe_highlight"/>
+            or 
+            <button string="Cancel" class="oe_link" special="cancel" />
+          </footer>
+        </form> 
+    </field>
+  </record>
+
+  <record id="action_account_invoice_partner" model="ir.actions.act_window">
+	<field name="name">Partner Info</field>
+	<field name="res_model">account.invoice.partner.wizard</field>
+	<field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="account_invoice_partner_wizard_form"/>
+  </record>
+
+  <record model="ir.values" id="ir_values_account_invoice_partner">
+    <field name="key2" eval="'client_print_multi'"/>
+    <field name="model" eval="'account.invoice'"/>
+    <field name="name">Refund Invoice</field>
+    <field name="value" eval="'ir.actions.act_window,%d'%action_account_invoice_partner"/>
+   </record>
+</odoo>

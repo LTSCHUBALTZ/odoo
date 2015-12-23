@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Add instructor field to existing view -->
+    <record model="ir.ui.view" id="account_invoice_res_company_form">
+        <field name="name">account.invoice.res.company.form</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="procurement.mrp_company"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='logistics_grp']" position='before'>
+                <group name="account_grp2" string=' '>
+                    <field name="nro_authorization"/>
+                    <field name="nro_init"/>
+                    <field name="nro_final"/>
+                    <field name="nro_next"/>
+                    <field name="issuance_deadline"/>
+                    <field name="state"/>
+                    <field name="account_key"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

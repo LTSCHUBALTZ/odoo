@@ -1,0 +1,176 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* account_invoice_partner_wizard
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-12-22 18:16+0000\n"
+"PO-Revision-Date: 2015-12-22 18:16+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_invoice_partner_wizard
+#: selection:account.invoice.partner.wizard,target_move:0
+msgid "All Entries"
+msgstr "All Entries"
+
+#. module: account_invoice_partner_wizard
+#: selection:account.invoice.partner.wizard,target_move:0
+msgid "All Posted Entries"
+msgstr "All Posted Entries"
+
+#. module: account_invoice_partner_wizard
+#: model:ir.ui.view,arch_db:account_invoice_partner_wizard.account_invoice_partner_wizard_form
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: account_invoice_partner_wizard
+#: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_account_invoice_city
+#: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_account_invoice_partner_wizard_city
+msgid "City"
+msgstr "Ciudad"
+
+#. module: account_invoice_partner_wizard
+#: model:ir.model,name:account_invoice_partner_wizard.model_res_company
+msgid "Companies"
+msgstr "Compañías"
+
+#. module: account_invoice_partner_wizard
+#: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_account_invoice_partner_wizard_company_id
+msgid "Company"
+msgstr "Compañía"
+
+#. module: account_invoice_partner_wizard
+#: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_account_invoice_partner_wizard_create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: account_invoice_partner_wizard
+#: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_account_invoice_partner_wizard_create_date
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: account_invoice_partner_wizard
+#: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_account_invoice_partner_wizard_street
+#: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_account_invoice_street
+msgid "Description"
+msgstr "Descripción"
+
+#. module: account_invoice_partner_wizard
+#: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_account_invoice_partner_wizard_display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: account_invoice_partner_wizard
+#: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_account_invoice_partner_wizard_date_to
+msgid "End Date"
+msgstr "Fecha final"
+
+#. module: account_invoice_partner_wizard
+#: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_res_company_nro_final
+msgid "Final Number"
+msgstr "Numero de fin"
+
+#. module: account_invoice_partner_wizard
+#: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_account_invoice_partner_wizard_id
+msgid "ID"
+msgstr "ID"
+
+#. module: account_invoice_partner_wizard
+#: model:ir.model,name:account_invoice_partner_wizard.model_account_invoice
+msgid "Invoice"
+msgstr "Factura"
+
+#. module: account_invoice_partner_wizard
+#: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_res_company_issuance_deadline
+msgid "Issuance Deadline"
+msgstr "Fecha limite de emisión"
+
+#. module: account_invoice_partner_wizard
+#: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_account_invoice_partner_wizard_journal_ids
+msgid "Journals"
+msgstr "Diarios"
+
+#. module: account_invoice_partner_wizard
+#: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_res_company_account_key
+msgid "Key"
+msgstr "Llave"
+
+#. module: account_invoice_partner_wizard
+#: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_account_invoice_partner_wizard___last_update
+msgid "Last Modified on"
+msgstr "Última modificación en"
+
+#. module: account_invoice_partner_wizard
+#: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_account_invoice_partner_wizard_write_uid
+msgid "Last Updated by"
+msgstr "Última actualización de"
+
+#. module: account_invoice_partner_wizard
+#: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_account_invoice_partner_wizard_write_date
+msgid "Last Updated on"
+msgstr "Última actualización en"
+
+#. module: account_invoice_partner_wizard
+#: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_res_company_nro_authorization
+msgid "Nro. Authorization"
+msgstr "Numero de autorización"
+
+#. module: account_invoice_partner_wizard
+#: model:ir.actions.act_window,name:account_invoice_partner_wizard.action_account_invoice_partner
+#: model:ir.ui.view,arch_db:account_invoice_partner_wizard.account_invoice_partner_form
+#: model:ir.ui.view,arch_db:account_invoice_partner_wizard.account_invoice_partner_wizard_form
+msgid "Company Info"
+msgstr "Info Compani"
+
+#. module: account_invoice_partner_wizard
+#: model:ir.ui.view,arch_db:account_invoice_partner_wizard.account_invoice_partner_wizard_form
+msgid "Print"
+msgstr "Imprimir"
+
+#. module: account_invoice_partner_wizard
+#: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_account_invoice_partner_wizard_date_from
+msgid "Start Date"
+msgstr "Fecha inicial"
+
+#. module: account_invoice_partner_wizard
+#: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_res_company_nro_init
+msgid "Start Number"
+msgstr "Numero de inicio"
+
+#. module: account_invoice_partner_wizard
+#: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_account_invoice_vat
+msgid "TAX ID"
+msgstr "NIT"
+
+#. module: account_invoice_partner_wizard
+#: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_account_invoice_partner_wizard_vat
+msgid "TIN"
+msgstr "NIT"
+
+#. module: account_invoice_partner_wizard
+#: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_account_invoice_partner_wizard_target_move
+msgid "Target Moves"
+msgstr "Movimientos destino"
+
+#. module: account_invoice_partner_wizard
+#: model:ir.model,name:account_invoice_partner_wizard.model_account_invoice_partner_wizard
+msgid "account.invoice.partner.wizard"
+msgstr "account.invoice.partner.wizard"
+
+#. module: account_invoice_partner_wizard
+#: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_res_company_footer
+msgid "footer"
+msgstr "Pie de pagina"
+
+#. module: account_invoice_partner_wizard
+#: model:ir.ui.view,arch_db:account_invoice_partner_wizard.account_invoice_partner_wizard_form
+msgid "or"
+msgstr "o"
+
