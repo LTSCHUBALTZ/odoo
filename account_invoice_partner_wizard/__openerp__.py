@@ -43,7 +43,7 @@ Account Invoice partner Wizard
     "depends": [
 	"base_vat",
 	"account_accountant",
-	"res_company_info_number",
+	"res_company_info_numbers",
     ],
     "data": [
         "report/report.xml",

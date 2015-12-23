@@ -34,7 +34,7 @@ class AccountInvoice(models.Model):
     street = fields.Char(related="company_id.street", string="Description", readonly=True)
     street2 = fields.Char(related="company_id.street2", string=" ", readonly=True)
     website = fields.Char(related="company_id.website", string=" ", readonly=True)
-    authorization_num = fields.Integer(related="company_id.authorization_num", string="Authorization Number", readonly=True)
+    authorization_num = fields.Char(related="company_id.authorization_num", string="Authorization Number", readonly=True)
     init_num = fields.Integer(related="company_id.init_num", string="Start Number", readonly=True)
     final_num = fields.Integer(related="company_id.final_num", string="Final Number", readonly=True)
     issuance_deadline = fields.Date(related="company_id.issuance_deadline", string="Issuance Deadline", readonly=True)
