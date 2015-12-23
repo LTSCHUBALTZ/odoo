@@ -29,14 +29,14 @@ class ResCompany(models.Model):
 
     _inherit = "res.company"
 
-    authorization_num = fields.Integer(string="Authorization Number", size=30, required=True, help="")
+    authorization_num = fields.Char(string="Authorization Number", size=30, required=True, help="")
     init_num = fields.Integer(string="Start Number", size=10, required=True, compute="_get_number_init_num", help="")
     final_num = fields.Integer(string="Final Number", size=10, required=True, default=1, help="")
     next_num = fields.Integer(string="Next Number", size=10, required=True, compute="_get_number_next_num", help="")
     issuance_deadline = fields.Date(string="Issuance Deadline", size=10, required=True, default=fields.Date.context_today, help="")
     account_key = fields.Char(string="Key", size=100, required=True, help="")
-    state = fields.Boolean(compute="_get_state", readonly=False, default=False, help="")
-    footer = fields.Char(string="footer", help="")
+    state = fields.Boolean(compute="_get_state", readonly=False, help="")
+    footer = fields.Char(string="Footer", help="")
 
     @api.depends("init_num")
     def _get_number_next_num(self):

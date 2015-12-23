@@ -26,9 +26,21 @@
     "summary": """
 	Add to res company, init, final autorizathion number.
 """,
-
     "description": """
-        Long description of module's purpose
+Res Company Information Numbers
+===============================
+
+Key Features
+------------
+
+- Autorization Number
+- Start Number
+- Final Number
+- Next Number
+- Issuance Deadline
+- Account Key
+- State
+- Footer
     """,
     "author": "Disprotec SRL & Ingenieria Thinkasoft de Venezuela",
     "website": "http://www.disprotec.net",
@@ -36,8 +48,6 @@
     "version": "0.1",
     "depends": [
                 "base",
-                "base_vat",
-                "account_accountant",
     ],
     "data": [
         "views/res_company.xml",
