@@ -41,9 +41,9 @@ Account Invoice partner Wizard
     "category": "Accounting & Finance",
     "version": "0.1",
     "depends": [
-	"base_vat",
-	"account_accountant",
-	"res_company_info_numbers",
+        "base_vat",
+        "account_accountant",
+        "res_company_info_numbers",
     ],
     "data": [
         "report/report.xml",
@@ -51,4 +51,8 @@ Account Invoice partner Wizard
         "views/report_invoices.xml",
         "wizards/account_invoice_partner.xml",
     ],
+    "demo": [
+        "demo/res_company.xml",
+        "demo/res_partner.xml",
+    ]
 }

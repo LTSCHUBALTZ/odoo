@@ -29,19 +29,31 @@ class AccountInvoicePartnerWizard(models.TransientModel):
     _inherit = "account.common.account.report"
     _name = 'account.invoice.partner.wizard'
 
+    @api.model
+    def _get_partner_id(self):
+        context = self.env.context
+        invoice_obj = self.env["account.invoice"]
+        if context.get("active_model", False) == "account.invoice":
+            invoice_id = context.get("active_id", False)
+            if invoice_id:
+                invoice_rec = invoice_obj.browse(invoice_id)
+                return invoice_rec.partner_id
+        return self.env["res.partner"]
+
     company_id = fields.Many2one('res.company', required=True, string='Company', readonly=False)
-    company_vat = fields.Char(related='company_id.vat', string='TIN', readonly=True)
+    company_vat = fields.Char(related='company_id.vat', string='TAX ID', readonly=True)
     company_city = fields.Char(related='company_id.city', string='City', readonly=True)
     company_street = fields.Char(related='company_id.street', string='Description', readonly=True)
     company_street2 = fields.Char(related='company_id.street2', string=' ', readonly=True)
     company_website = fields.Char(related='company_id.website', string=' ', readonly=True)
 
-    partner_id = fields.Many2one('res.partner', required=True, string='Partner', readonly=False)
+    partner_id = fields.Many2one('res.partner', required=True, string='Partner', readonly=False, default=_get_partner_id)
     partner_vat = fields.Char(related='partner_id.vat', string='TIN', readonly=True)
     partner_city = fields.Char(related='partner_id.city', string='City', readonly=True)
     partner_street = fields.Char(related='partner_id.street', string='Description', readonly=True)
     partner_street2 = fields.Char(related='partner_id.street2', string=' ', readonly=True)
     partner_website = fields.Char(related='partner_id.website', string=' ', readonly=True)
+
 
     def _print_report(self, data):
         data = self.pre_print_report(data)
