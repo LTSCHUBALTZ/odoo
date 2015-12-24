@@ -44,5 +44,6 @@ class SaleMarginExtended(models.AbstractModel):
             'data': data['form'],
             'docs': docs,
             'time': time,
+            'res_company_wizard': self.env['res.company'].browse(data['form']['company_id'][0]),
         }
         return self.env['report'].render('account_invoice_partner_wizard.report_invoices', docargs)
