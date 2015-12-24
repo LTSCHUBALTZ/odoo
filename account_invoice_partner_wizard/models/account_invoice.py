@@ -23,6 +23,7 @@
 ##############################################################################
 
 from openerp import models, fields, api
+import oso
 
 
 class AccountInvoice(models.Model):
@@ -40,3 +41,10 @@ class AccountInvoice(models.Model):
     issuance_deadline = fields.Date(related="company_id.issuance_deadline", string="Issuance Deadline", readonly=True)
     account_key = fields.Char(related="company_id.account_key", string="Key", readonly=True)
     footer = fields.Char(related="company_id.footer", string="footer", readonly=True)
+    control_code = fields.Char(compute="_get_control_code", string="Control Code", readonly=True)
+
+    @api.depends("vat")
+    def _get_control_code(self):
+        for invoice in self:
+            qr = oso.CodigoControlV7()
+            invoice.control_code = qr.generar(7904006306693, 876814, 1665979, 20080519, 35959, "zZ7Z]xssKqkEf_6K9uH(EcV+%x+u[Cca9T%+_$kiLjT8(zr3T9b5Fx2xG-D+_EBS")

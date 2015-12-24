@@ -15,6 +15,7 @@
                             <field name="street"/>
                             <field name="street2"/>
                             <field name="website"/>
+                            <field name="control_code"/>
                         </group>
                         <group>
                             <field name="authorization_num"/>

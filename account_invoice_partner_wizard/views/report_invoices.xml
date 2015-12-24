@@ -56,29 +56,25 @@
             <table class="table table-condensed">
                 <thead>
                     <tr>
+                        <th class="text-center">Quantity</th>
+                        <th class="text-left">Barcode</th>
+                        <th class="text-left">Internal Reference</th>
                         <th>Description</th>
-                        <th class="text-right">Quantity</th>
                         <th class="text-right">Unit Price</th>
-                        <th t-if="display_discount" class="text-right" groups="sale.group_discount_per_so_line">Disc.(%)</th>
-                        <th class="text-right">Taxes</th>
                         <th class="text-right">Price</th>
                     </tr>
                 </thead>
                 <tbody class="invoice_tbody">
                     <tr t-foreach="o.invoice_line_ids" t-as="l">
-                        <td><span t-field="l.name"/></td>
-                        <td class="text-right">
+                        <td class="text-left">
                             <span t-field="l.quantity"/>
                             <span t-field="l.uom_id"  groups="product.group_uom"/>
                         </td>
+                        <td class="text-left"><span t-field="l.product_id.barcode"/></td>
+                        <td class="text-left"><span t-field="l.product_id.default_code"/></td>
+                        <td><span t-field="l.name"/></td>
                         <td class="text-right">
                             <span t-field="l.price_unit"/>
-                        </td>
-                        <td t-if="display_discount" class="text-right" groups="sale.group_discount_per_so_line">
-                            <span t-field="l.discount"/>
-                        </td>
-                        <td>
-                            <span t-esc="', '.join(map(lambda x: (x.description or x.name), l.invoice_line_tax_ids))"/>
                         </td>
                         <td class="text-right">
                             <span t-field="l.price_subtotal" 
@@ -126,7 +122,11 @@
                 <strong>Fiscal Position Remark:</strong>
                 <span t-field="o.fiscal_position_id.note"/>
             </p>
-            
+            <p t-if="o.control_code">
+                <span t-field="o.control_code"/>
+            </p>
+            <p class="mt16"><img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' %('QR', o.control_code, 600, 160)" style="width:150px;height:150px;" /></p>
+            <p style="text-align:center;" t-field="res_company.footer"/>
         </div>
     </t>
 </template>
@@ -139,144 +139,3 @@
     </t>
 </template>
 </odoo>
-
-<!--
-<?xml version="1.0" encoding="utf-8"?>
-<odoo>
-    <template id="report_invoices">
-        <t t-call="report.html_container">
-            <t t-call="report.external_layout">
-                <div class="page">
-                    <div style='background-color:blue;text-align:center;'>
-                        <div style='background-color:red;float:left;'>
-                            <strong>TAX</strong><p t-esc="data['partner_vat']"/>
-                        </div>
-                        <div style='display:inline-block;background-color:red;float:right;'>
-                            <p>TAX ID</p><p t-esc="data['company_vat']"/>
-                        </div>
-                        <div style='display:inline-block;background-color:yellow;margin:auto'>
-                            <h2> <span>Invoice</span></h2>
-                        </div>
-                    </div>
-                    <table class="table table-condensed">
-                    <thead>
-                        <tr>
-                            <th class="text-center">CANT</th>
-                            <th class="text-left">CODE DMC</th>
-                            <th class="text-left">CODIGO FABRICANTE</th>
-                            <th class="text-left">CONCEPT</th>
-                            <th class="text-right">UNITARIO</th>
-                            <th class="text-right">TOTAL</th>
-                        </tr>
-                    </thead>
-                    <tbody class="invoice_tbody">
-                    <tr t-foreach="docs.invoice_line_ids" t-as="l">
-                        <td class="text-center">
-                            <span t-field="l.quantity"/>
-                            <span t-field="l.uom_id"  groups="product.group_uom"/>
-                        </td>
-
-                        <td ><span t-field="l.product_id.barcode"/></td>
-
-                        <td>
-                            <span t-field="l.product_id.default_code"/>
-                        </td>
-
-                        <td><span t-field="l.name"/></td>
-                        
-                        <td class="text-right">
-                            <span t-field="l.price_unit"/>
-                        </td>
-
-
-                        <td class="text-right">
-                            <span t-field="l.price_subtotal" 
-                                t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
-                        </td>
-                    </tr>
-                </tbody>
-                    </table>
-                </div>
-            </t>
-        </t>
-    </template>
-</odoo>-->
-                <!--<div class="row mt32 mb32" id="informations">
-                    <div t-if="data['form']['user_id']" class="col-xs-3">
-                        <strong>Salesperson:</strong>
-                        <p t-raw="data['form']['user_id'][1]"/>
-                    </div>
-                    <div t-if="not data['form']['user_id']" class="col-xs-3">
-                        <strong>Salesperson:</strong>
-                        <p>All Salespersons</p>
-                    </div>
-                    <div t-if="data['form']['category_names']" class="col-xs-3">
-                        <strong>Category:</strong>
-                        <p>
-                             <t t-foreach="data['form']['category_names']" t-as="c">
-                                <t t-esc="c"/>
-                            </t>
-                        </p>
-                    </div>
-                    <div t-if="not data['form']['category_names']" class="col-xs-3">
-                        <strong>Category:</strong>
-                        <p>All Tags</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-4 pull-right">
-                        <table class="table table-condensed">
-                            <tr class="border-black">
-                                <td><strong>Total Sales</strong></td>
-                                <td class="text-right">
-                                    <t t-esc="formatLang(total_sales, currency_obj=res_company.currency_id)"/>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                <div class="row">
-                   <h2>
-                        <span>Total Outgoing Products</span>
-                    </h2>
-                </div>
-                <table class="table table-condensed">
-                    <thead>
-                        <tr>
-                            <th>No.</th>
-                            <th class="text-center">Description</th>
-                            <th class="text-center">Qty</th>
-                            <th class="text-right">Total</th>
-                        </tr>
-                    </thead>
-                    <tbody class="sale_tbody">
-                        <t t-set="total_sales_line" t-value="0"/>
-                        <tr t-foreach="get_sales['sale_order_line']" t-as="l">
-                            <td>
-                               <span t-esc="l['no']"/>
-                            </td>
-                            <td class="text-center">
-                               <span t-esc="l['name']"/>
-                            </td>
-                            <td class="text-center">
-                               <span t-esc="l['qty']"/>
-                            </td>
-                            <td class="text-right">
-                               <span t-esc="formatLang(l['total'], currency_obj=res_company.currency_id)"/>
-                            </td>
-                            <t t-set="total_sales_line" t-value="total_sales_line+l['total']"/>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="row">
-                    <div class="col-xs-4 pull-right">
-                        <table class="table table-condensed">
-                            <tr class="border-black">
-                                <td><strong>Total products</strong></td>
-                                <td class="text-right">
-                                    <t t-esc="formatLang(total_sales_line, currency_obj=res_company.currency_id)"/>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>-->
