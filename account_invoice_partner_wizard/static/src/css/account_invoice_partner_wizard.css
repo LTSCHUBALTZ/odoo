@@ -1,3 +1,9 @@
 .footerV2{
-    background-color: black;
+	display: block;
+}
+
+.style-img{
+	background: transparent;
+	max-height: 45px;
+	max-width: 45px;
 }
