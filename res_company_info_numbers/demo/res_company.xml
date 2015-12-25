@@ -1,7 +1,6 @@
-<openerp>
-    <data>
+<odoo>
 	<record id="base.main_company" model="res.company">
-		<field name="authorization_num">423423542353</field>
+		<field name="authorization_num">423423542</field>
 		<field name="init_num">1</field>
 		<field name="final_num">10</field>
 		<field name="next_num">11</field>
@@ -10,5 +9,4 @@
 		<field name="state">True</field>
 		<field name="footer">There is a little description about the footer</field>
         </record>
-    </data>
-</openerp>
+</odoo>

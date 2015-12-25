@@ -66,7 +66,6 @@ class AccountInvoicePartnerWizard(models.TransientModel):
     partner_website = fields.Char(related='partner_id.website', string=' ', readonly=True)
 
     def _print_report(self, data):
-        # self.env["res.partner"].browse(invoice_id)
         data = self.pre_print_report(data)
         data['form'].update(self.read(['company_id', 'company_vat', 'company_city', 'company_street', 'company_street2', 'company_website',
             'partner_id', 'partner_vat', 'partner_city', 'partner_street', 'partner_street2', 'partner_website'])[0])

@@ -23,7 +23,6 @@
                             <field name="final_num"/>
                             <field name="issuance_deadline"/>
                             <field name="account_key"/>
-                            <field name="footer"/>
                         </group>
                     </group>
                 </page>
