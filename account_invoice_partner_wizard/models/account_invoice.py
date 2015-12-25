@@ -35,16 +35,16 @@ class AccountInvoice(models.Model):
     street = fields.Char(related="company_id.street", string="Description", readonly=True)
     street2 = fields.Char(related="company_id.street2", string=" ", readonly=True)
     website = fields.Char(related="company_id.website", string=" ", readonly=True)
-    authorization_num = fields.Char(related="company_id.authorization_num", string="Authorization Number", readonly=True)
+    authorization_num = fields.Integer(related="company_id.authorization_num", string="Authorization Number", readonly=True)
     init_num = fields.Integer(related="company_id.init_num", string="Start Number", readonly=True)
     final_num = fields.Integer(related="company_id.final_num", string="Final Number", readonly=True)
     issuance_deadline = fields.Date(related="company_id.issuance_deadline", string="Issuance Deadline", readonly=True)
     account_key = fields.Char(related="company_id.account_key", string="Key", readonly=True)
-    footer = fields.Char(related="company_id.footer", string="footer", readonly=True)
     control_code = fields.Char(compute="_get_control_code", string="Control Code", readonly=True)
 
     @api.depends("vat")
     def _get_control_code(self):
         for invoice in self:
             qr = oso.CodigoControlV7()
-            invoice.control_code = qr.generar(7904006306693, 876814, 1665979, 20080519, 35959, "zZ7Z]xssKqkEf_6K9uH(EcV+%x+u[Cca9T%+_$kiLjT8(zr3T9b5Fx2xG-D+_EBS")
+            invoice.control_code = qr.generar(self.authorization_num, 32423, 1665979, 20080519, 35959, "zZ7Z]xssKqkEf_6K9uH(EcV+%x+u[Cca9T%+_$kiLjT8(zr3T9b5Fx2xG-D+_EBS")
+            # invoice.control_code = qr.generar(self.authorization_num, self.number, self.partner_id.vat, self.date_invoice, self.amount_total, self.company_id.account_key)
