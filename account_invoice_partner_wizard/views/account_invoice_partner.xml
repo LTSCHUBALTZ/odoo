@@ -1,33 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Add instructor field to existing view -->
-    <record model="ir.ui.view" id="account_invoice_partner_form">
-        <field name="name">account.invoice.partner.form</field>
-        <field name="model">account.invoice</field>
-        <field name="inherit_id" ref="account.invoice_form"/>
-        <field name="arch" type="xml">
-            <xpath expr="//page[2]" position='after'>
-                <page string="Company Info">
-                    <group>
-                        <group>
-                            <field name="vat"/>
-                            <field name="city"/>
-                            <field name="street"/>
-                            <field name="street2"/>
-                            <field name="website"/>
-                            <field name="control_code"/>
-                        </group>
-                        <group>
-                            <field name="authorization_num"/>
-                            <field name="init_num"/>
-                            <field name="final_num"/>
-                            <field name="issuance_deadline"/>
-                            <field name="account_key"/>
-                            <field name="footer"/>
-                        </group>
-                    </group>
-                </page>
-            </xpath>
-        </field>
-    </record>
+	<template id="assets_backend" name="Account invoice partner wizard assets" inherit_id="report.assets_common">
+	    <xpath expr="." position="inside">
+	        <link rel="stylesheet" href="/account_invoice_partner_wizard/static/src/css/account_invoice_partner_wizard.css"/>
+	    </xpath>
+	</template>
 </odoo>

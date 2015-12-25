@@ -48,6 +48,7 @@ Account Invoice partner Wizard
     "data": [
         "report/report.xml",
         "views/account_invoice_partner.xml",
+        "views/account_invoice_partner_view.xml",
         "views/report_invoices.xml",
         "wizards/account_invoice_partner.xml",
     ],
