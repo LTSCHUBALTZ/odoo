@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="ir.ui.view" id="account_invoice_sequence_company_form">
+        <field name="name">account.invoice.res.company.form</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="res_company_info_numbers.account_invoice_res_company_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='authorization_num']" position="before">
+                    <field name="sequence_id"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

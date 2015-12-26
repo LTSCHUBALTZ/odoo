@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <record id="base.main_company" model="res.company">
+            <field name="sequence_id" ref="sequence_base_company"/>
+        </record>
+
+    </data>
+</openerp>
+

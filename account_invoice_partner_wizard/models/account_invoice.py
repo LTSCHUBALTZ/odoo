@@ -30,10 +30,6 @@ class AccountInvoice(models.Model):
 
     _inherit = "account.invoice"
 
-    information_company_id = fields.Many2one("res.company", 
-	string="Company", change_default=True,
-        required=True, readonly=True, states={"draft": [("readonly", False)]},
-        default=lambda self: self.env["res.company"]._company_default_get("account.invoice"))
     vat = fields.Char(related="information_company_id.vat", string="TAX ID", readonly=True)
     city = fields.Char(related="information_company_id.city", string="City", readonly=True)
     street = fields.Char(related="information_company_id.street", string="Description", readonly=True)

@@ -22,39 +22,29 @@
 #
 ##############################################################################
 {
-    "name": "Account Invoice Partner Wizard",
+    "name": "Company Invoice Sequence",
     "summary": """
-Display a wizard when the new invoice report is printed.
-You can choose the partner and company specific for the
-information on the report to prit
 """,
     "description": """
-Account Invoice partner Wizard
-==============================
+Company Invoice Sequence
+========================
 
-- New report for invoice
-- Fields related with the company
-- Choose partner and company for information in the invoice report
+- New sequence number in the invoice taked of company in the invoice
     """,
     "author": "Disprotec SRL & Ingenieria Thinkasoft de Venezuela",
     "website": "http://www.disprotec.net",
     "category": "Accounting & Finance",
     "version": "0.1",
     "depends": [
-        "base_vat",
+        "base",
         "account_accountant",
-        "res_company_info_numbers",
-	"res_company_invoice_sequence",
+	"res_company_info_numbers",
     ],
     "data": [
-        "report/report.xml",
-        "views/account_invoice_partner.xml",
-        "views/account_invoice_partner_view.xml",
-        "views/report_invoices.xml",
-        "wizards/account_invoice_partner.xml",
+        "views/account_invoice.xml",
+	"views/res_company.xml",
+	"data/res_groups.xml",
+	"data/ir_sequence.xml",
+	"data/res_company.xml",
     ],
-    "demo": [
-        "demo/res_company.xml",
-        "demo/res_partner.xml",
-    ]
 }

@@ -21,40 +21,15 @@
 #    Coded by: Aular Hector Manuel (aular.hector3@gmail.com)
 #
 ##############################################################################
-{
-    "name": "Account Invoice Partner Wizard",
-    "summary": """
-Display a wizard when the new invoice report is printed.
-You can choose the partner and company specific for the
-information on the report to prit
-""",
-    "description": """
-Account Invoice partner Wizard
-==============================
 
-- New report for invoice
-- Fields related with the company
-- Choose partner and company for information in the invoice report
-    """,
-    "author": "Disprotec SRL & Ingenieria Thinkasoft de Venezuela",
-    "website": "http://www.disprotec.net",
-    "category": "Accounting & Finance",
-    "version": "0.1",
-    "depends": [
-        "base_vat",
-        "account_accountant",
-        "res_company_info_numbers",
-	"res_company_invoice_sequence",
-    ],
-    "data": [
-        "report/report.xml",
-        "views/account_invoice_partner.xml",
-        "views/account_invoice_partner_view.xml",
-        "views/report_invoices.xml",
-        "wizards/account_invoice_partner.xml",
-    ],
-    "demo": [
-        "demo/res_company.xml",
-        "demo/res_partner.xml",
-    ]
-}
+from openerp import models, fields, api
+
+
+class ResCompany(models.Model):
+
+    _inherit = "res.company"
+
+    sequence_id = fields.Many2one("ir.sequence", string="Invoice Sequence",
+        help="This field contains the information related to the numbering of invoices.", 
+	required=True, 
+	copy=False)

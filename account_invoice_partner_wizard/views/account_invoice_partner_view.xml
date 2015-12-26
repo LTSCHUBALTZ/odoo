@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <!-- Add instructor field to existing view -->
+
+    <record model="ir.ui.view" id="invoice_form">
+        <field name="name">account.invoice.partner.form</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="res_company_invoice_sequence.invoice_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='information_company_id']" position="replace">
+            </xpath>
+            <xpath expr="//field[@name='invoice_control_number']" position="replace">
+            </xpath>
+        </field>
+    </record>
+
     <record model="ir.ui.view" id="account_invoice_partner_form">
         <field name="name">account.invoice.partner.form</field>
         <field name="model">account.invoice</field>
@@ -19,6 +31,7 @@
                             <field name="control_code"/>
                         </group>
                         <group string="Company Numbers">
+			    <field name="invoice_control_number"/>
                             <field name="authorization_num"/>
                             <field name="init_num"/>
                             <field name="final_num"/>
