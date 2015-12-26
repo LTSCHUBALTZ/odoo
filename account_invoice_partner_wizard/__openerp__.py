@@ -51,6 +51,7 @@ Account Invoice partner Wizard
         "views/account_invoice_partner_view.xml",
         "views/report_invoices.xml",
         "wizards/account_invoice_partner.xml",
+	"data/res_groups.xml",
     ],
     "demo": [
         "demo/res_company.xml",
