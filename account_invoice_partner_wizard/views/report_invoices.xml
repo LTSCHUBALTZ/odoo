@@ -102,6 +102,10 @@
                     <strong>Fiscal Position Remark:</strong>
                     <span t-field="o.fiscal_position_id.note"/>
                 </p>
+                <div>
+                        <p class="left-margin-49">Control Code: <span t-field="o.control_code"/></p>
+                        <p class="right-margin_49">Issuance Deadline: <span t-field="o.issuance_deadline"/></p>
+                </div> 
             </div>
         </t>
 </template>
@@ -144,6 +148,7 @@
                 </div>
                 <div style="margin:0 auto;">
                     <h2 class="text-center">
+                        <t t-if="data['state'] is False">
                         <span t-if="o.type == 'out_invoice' and (o.state == 'open' or o.state == 'paid')">Invoice</span>
                         <span t-if="o.type == 'out_invoice' and o.state == 'proforma2'">PRO-FORMA</span>
                         <span t-if="o.type == 'out_invoice' and o.state == 'draft'">Draft Invoice</span>
@@ -151,6 +156,8 @@
                         <span t-if="o.type == 'out_refund'">Refund</span>
                         <span t-if="o.type == 'in_refund'">Vendor Refund</span>
                         <span t-if="o.type == 'in_invoice'">Vendor Bill</span>
+                        </t>
+                        <span t-if="data['state'] is True">Duplicate</span>
                         <span t-field="o.number"/>
                     </h2>    
                 </div>
@@ -163,15 +170,11 @@
     <div class="footer">
         <div class="text-center" style="border-top: 1px solid black;">
             <t t-if="company.custom_footer">
-                <div class="row">
+                <div class="row" style="clear:both;">
                     <div style="float: left;">
                         <img class="style-img" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' %('QR', o.control_code, 600, 600)"/>
                     </div>
-                    <div>
-                        <p style="float: left;">Control Code: <span t-field="o.control_code"/></p>
-                        <p style="float: right;">Issuance Deadline: <span t-field="o.issuance_deadline"/></p>
-                        <span t-raw="company.rml_footer"/>
-                    </div> 
+                    <p style="float: center;"><span t-raw="company.rml_footer"/></p>
                 </div>
             </t>
             <ul class="list-inline">
@@ -183,7 +186,6 @@
         </div>
     </div>      
 </template>
-
 
 <template id="report_invoices">
     <t t-call="report.html_container">

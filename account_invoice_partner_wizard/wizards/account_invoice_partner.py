@@ -51,6 +51,14 @@ class AccountInvoicePartnerWizard(models.TransientModel):
                 return invoice_rec.partner_id
         return self.env["res.partner"]
 
+    def _get_state(self):
+        context = self.env.context
+        if context.get("active_model", False) == "account.invoice":
+            if context.get("duplicate", False):
+                return True
+        return False
+
+
     company_id = fields.Many2one('res.company', required=True, string='Company', readonly=False, default=_get_company_id)
     company_vat = fields.Char(related='company_id.vat', string='TAX ID', readonly=True)
     company_city = fields.Char(related='company_id.city', string='City', readonly=True)
@@ -64,9 +72,10 @@ class AccountInvoicePartnerWizard(models.TransientModel):
     partner_street = fields.Char(related='partner_id.street', string='Description', readonly=True)
     partner_street2 = fields.Char(related='partner_id.street2', string=' ', readonly=True)
     partner_website = fields.Char(related='partner_id.website', string=' ', readonly=True)
+    state = fields.Boolean(string='Duplicate', default=_get_state, readonly=False, help="")
 
     def _print_report(self, data):
         data = self.pre_print_report(data)
         data['form'].update(self.read(['company_id', 'company_vat', 'company_city', 'company_street', 'company_street2', 'company_website',
-            'partner_id', 'partner_vat', 'partner_city', 'partner_street', 'partner_street2', 'partner_website'])[0])
+            'partner_id', 'partner_vat', 'partner_city', 'partner_street', 'partner_street2', 'partner_website','state'])[0])
         return self.env['report'].with_context(landscape=True).get_action(self, 'account_invoice_partner_wizard.report_invoices',data=data)
