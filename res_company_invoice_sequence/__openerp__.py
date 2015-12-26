@@ -43,7 +43,6 @@ Company Invoice Sequence
     "data": [
         "views/account_invoice.xml",
 	"views/res_company.xml",
-	"data/res_groups.xml",
 	"data/ir_sequence.xml",
 	"data/res_company.xml",
     ],

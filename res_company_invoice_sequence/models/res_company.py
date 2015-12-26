@@ -31,5 +31,4 @@ class ResCompany(models.Model):
 
     sequence_id = fields.Many2one("ir.sequence", string="Invoice Sequence",
         help="This field contains the information related to the numbering of invoices.", 
-	required=True, 
 	copy=False)

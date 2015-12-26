@@ -39,6 +39,7 @@ class AccountInvoice(models.Model):
     @api.multi
     def invoice_validate(self):
         for invoice in self:
-            invoice.invoice_control_number = invoice.information_company_id.sequence_id.next_by_id() 
+	    if invoice.information_company_id.sequence_id.id:
+                invoice.invoice_control_number = invoice.information_company_id.sequence_id.next_by_id() 
 
         return super(AccountInvoice, self).invoice_validate()
