@@ -9,7 +9,7 @@
             <xpath expr="//page[2]" position='after'>
                 <page string="Company Info">
                     <group>
-                        <group>
+                        <group string="Company General Information">
 			    <field name="information_company_id"/>
                             <field name="vat"/>
                             <field name="city"/>
@@ -18,7 +18,7 @@
                             <field name="website"/>
                             <field name="control_code"/>
                         </group>
-                        <group>
+                        <group string="Company Numbers">
                             <field name="authorization_num"/>
                             <field name="init_num"/>
                             <field name="final_num"/>
