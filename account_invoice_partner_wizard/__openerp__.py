@@ -36,7 +36,7 @@ Account Invoice partner Wizard
 - Fields related with the company
 - Choose partner and company for information in the invoice report
     """,
-    "author": "Disprotec SRL & Ingenieria Thinkasoft de Venezuela",
+    "author": "Ingenieria Thinkasoft de Venezuela",
     "website": "http://www.disprotec.net",
     "category": "Accounting & Finance",
     "version": "0.1",
@@ -44,7 +44,8 @@ Account Invoice partner Wizard
         "base_vat",
         "account_accountant",
         "res_company_info_numbers",
-	"res_company_invoice_sequence",
+        "res_company_invoice_sequence",
+        "account_invoice_amount_to_text_es_BOL",
     ],
     "data": [
         "report/report.xml",
