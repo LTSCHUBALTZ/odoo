@@ -36,7 +36,6 @@ class AccountInvoice(models.Model):
     street2 = fields.Char(related="information_company_id.street2", string=" ", readonly=True)
     website = fields.Char(related="information_company_id.website", string=" ", readonly=True)
     authorization_num = fields.Integer(related="information_company_id.authorization_num", string="Authorization Number", readonly=True)
-    init_num = fields.Integer(related="information_company_id.init_num", string="Start Number", readonly=True)
     final_num = fields.Integer(related="information_company_id.final_num", string="Final Number", readonly=True)
     issuance_deadline = fields.Date(related="information_company_id.issuance_deadline", string="Issuance Deadline", readonly=True)
     account_key = fields.Char(related="information_company_id.account_key", string="Key", readonly=True)

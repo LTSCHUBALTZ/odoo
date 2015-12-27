@@ -8,9 +8,7 @@
             <xpath expr="//group[@name='logistics_grp']" position="before">
                 <group name="account_grp2" string="Company Numbers">
                     <field name="authorization_num" required="1"/>
-                    <field name="init_num" required="1"/>
                     <field name="final_num" required="1"/>
-                    <field name="next_num" required="1"/>
                     <field name="issuance_deadline" required="1"/>
                     <field name="state"/>
                     <field name="account_key" required="1"/>

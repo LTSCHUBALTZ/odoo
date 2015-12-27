@@ -30,7 +30,6 @@
                         </group>
                         <group string="Company Numbers">
                             <field name="authorization_num"/>
-                            <field name="init_num"/>
                             <field name="final_num"/>
                             <field name="issuance_deadline"/>
                             <field name="account_key"/>

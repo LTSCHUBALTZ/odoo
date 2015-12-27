@@ -30,17 +30,10 @@ class ResCompany(models.Model):
     _inherit = "res.company"
 
     authorization_num = fields.Integer(string="Authorization Number", size=20, help="")
-    init_num = fields.Integer(string="Start Number", size=10, help="")
     final_num = fields.Integer(string="Final Number", size=10, default=1, help="")
-    next_num = fields.Integer(string="Next Number", size=10, compute="_get_number_next_num", help="")
     issuance_deadline = fields.Date(string="Issuance Deadline", size=10, default=fields.Date.context_today, help="")
     account_key = fields.Char(string="Key", size=100, help="")
     state = fields.Boolean(compute="_get_state", readonly=False, help="")
-
-    @api.depends("init_num")
-    def _get_number_next_num(self):
-        for company in self:
-            company.next_num = company.init_num
 
     @api.depends("issuance_deadline")
     def _get_state(self):
