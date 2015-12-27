@@ -7,6 +7,5 @@
 		<field name="issuance_deadline">2019-08-10</field>
 		<field name="account_key">HJF787JHD</field>
 		<field name="state">True</field>
-		<field name="footer">There is a little description about the footer</field>
         </record>
 </odoo>
