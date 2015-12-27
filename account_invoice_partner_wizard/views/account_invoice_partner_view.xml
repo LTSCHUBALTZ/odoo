@@ -8,8 +8,6 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='information_company_id']" position="replace">
             </xpath>
-            <xpath expr="//field[@name='invoice_control_number']" position="replace">
-            </xpath>
         </field>
     </record>
 
@@ -31,7 +29,6 @@
                             <field name="control_code"/>
                         </group>
                         <group string="Company Numbers">
-			    <field name="invoice_control_number"/>
                             <field name="authorization_num"/>
                             <field name="init_num"/>
                             <field name="final_num"/>
