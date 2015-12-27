@@ -22,31 +22,5 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api
-
-
-class AccountInvoice(models.Model):
-
-    _inherit = "account.invoice"
-
-    information_company_id = fields.Many2one(
-        "res.company",
-        string="Company",
-        change_default=True,
-        required=True,
-        readonly=True,
-        states={"draft": [("readonly", False)]},
-        default=lambda self:
-        self.env["res.company"]._company_default_get("account.invoice"))
-
-    invoice_control_number = fields.Char(readonly=True, copy=False)
-
-    @api.multi
-    def invoice_validate(self):
-        for invoice in self:
-            if invoice.information_company_id.sequence_id.id and \
-                invoice.type == "out_invoice":
-                invoice.invoice_control_number = invoice.\
-                information_company_id.sequence_id.next_by_id()
-
-        return super(AccountInvoice, self).invoice_validate()
+from . import test_data_integrity
+from . import test_invoice_control_number

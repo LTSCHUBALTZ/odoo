@@ -22,31 +22,31 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api
+from openerp.tests.common import TransactionCase
 
 
-class AccountInvoice(models.Model):
+class TestDataIntegrity(TransactionCase):
 
-    _inherit = "account.invoice"
+    def setUp(self):
+        super(TestDataIntegrity, self).setUp()
 
-    information_company_id = fields.Many2one(
-        "res.company",
-        string="Company",
-        change_default=True,
-        required=True,
-        readonly=True,
-        states={"draft": [("readonly", False)]},
-        default=lambda self:
-        self.env["res.company"]._company_default_get("account.invoice"))
+    def test_01_data_integrity(self):
 
-    invoice_control_number = fields.Char(readonly=True, copy=False)
+        # Data Integrity of Company Sequence
+        company_invoice_sequence = self.env.ref(
+            "res_company_invoice_sequence.sequence_base_company")
 
-    @api.multi
-    def invoice_validate(self):
-        for invoice in self:
-            if invoice.information_company_id.sequence_id.id and \
-                invoice.type == "out_invoice":
-                invoice.invoice_control_number = invoice.\
-                information_company_id.sequence_id.next_by_id()
+        self.assertEquals(company_invoice_sequence.code,
+                          "res.company.invoice.sequence")
+        self.assertEquals(company_invoice_sequence.padding,
+                          5)
+        self.assertEquals(company_invoice_sequence.number_next,
+                          1)
+        self.assertEquals(company_invoice_sequence.number_increment,
+                          1)
 
-        return super(AccountInvoice, self).invoice_validate()
+        # Data Integrity Sequence in Company
+        main_company = self.env.ref("base.main_company")
+
+        self.assertEquals(main_company.sequence_id,
+                          company_invoice_sequence)

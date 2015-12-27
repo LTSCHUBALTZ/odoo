@@ -4,7 +4,7 @@
 
         <record id="sequence_base_company" model="ir.sequence">
             <field name="name">Company Invoice Sequence</field>
-            <field name="code">res.company</field>
+            <field name="code">res.company.invoice.sequence</field>
             <field name="padding">5</field>
             <field name="number_next">1</field>
             <field name="number_increment">1</field>
