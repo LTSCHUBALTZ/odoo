@@ -34,7 +34,7 @@ class AccountInvoice(models.Model):
         required=True, readonly=True, states={"draft": [("readonly", False)]},
         default=lambda self: self.env["res.company"]._company_default_get("account.invoice"))
 
-    invoice_control_number = fields.Char(store=True, readonly=True, copy=False)
+    invoice_control_number = fields.Char(readonly=True, copy=False)
 
     @api.multi
     def invoice_validate(self):
