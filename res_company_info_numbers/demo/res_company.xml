@@ -1,9 +1,8 @@
 <odoo>
-	<record id="base.main_company" model="res.company">
-		<field name="authorization_num">423423542</field>
-		<field name="final_num">10</field>
-		<field name="issuance_deadline">2019-08-10</field>
-		<field name="account_key">HJF787JHD</field>
-		<field name="state">True</field>
-        </record>
+    <record id="base.main_company" model="res.company">
+        <field name="authorization_num">423423542</field>
+        <field name="final_num">10</field>
+        <field name="issuance_deadline">2019-08-10</field>
+        <field name="account_key">HJF787JHD</field>
+    </record>
 </odoo>
