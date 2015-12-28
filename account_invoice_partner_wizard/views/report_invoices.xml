@@ -82,6 +82,9 @@
                                 </tr>
                             </t>
                             <tr class="border-black">
+                                <td class="text-left">
+                                     <span t-field="o.amount_to_text"/>
+                                </td>
                                 <td><strong>Total</strong></td>
                                 <td class="text-right">
                                      <span t-field="o.amount_total" t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
@@ -169,12 +172,12 @@
 <template id="external_layout_footer">
     <div class="footer">
         <div class="text-center" style="border-top: 1px solid black;">
-            <t t-if="company.custom_footer">
-                <div class="row" style="clear:both;">
+            <t >
+                <div t-if="o.control_code" class="row" style="clear:both;">
                     <div style="float: left;">
                         <img class="style-img" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' %('QR', o.control_code, 600, 600)"/>
                     </div>
-                    <p style="float: center;"><span t-raw="company.rml_footer"/></p>
+                    <p t-if="company.custom_footer" style="float: center;"><span t-raw="company.rml_footer"/></p>
                 </div>
             </t>
             <ul class="list-inline">
