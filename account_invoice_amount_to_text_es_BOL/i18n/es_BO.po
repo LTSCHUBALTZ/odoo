@@ -1,0 +1,32 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* account_invoice_amount_to_text_es_BOL
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-12-28 17:09+0000\n"
+"PO-Revision-Date: 2015-12-28 17:09+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_invoice_amount_to_text_es_BOL
+#: model:ir.model.fields,help:account_invoice_amount_to_text_es_BOL.field_account_invoice_amount_to_text
+msgid "Amount of the invoice in letter"
+msgstr "Amount of the invoice in letter"
+
+#. module: account_invoice_amount_to_text_es_BOL
+#: model:ir.model.fields,field_description:account_invoice_amount_to_text_es_BOL.field_account_invoice_amount_to_text
+msgid "Amount to Text"
+msgstr "Monto en Texto"
+
+#. module: account_invoice_amount_to_text_es_BOL
+#: model:ir.model,name:account_invoice_amount_to_text_es_BOL.model_account_invoice
+msgid "Invoice"
+msgstr "Factura"
+
