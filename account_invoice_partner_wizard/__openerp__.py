@@ -34,7 +34,7 @@ Account Invoice partner Wizard
 
 - New report for invoice
 - Fields related with the company
-- Choose partner and company for information in the invoice report
+- Choose company for information in the QR invoice report
     """,
     "author": "Ingenieria Thinkasoft de Venezuela",
     "website": "http://www.disprotec.net",
@@ -42,6 +42,7 @@ Account Invoice partner Wizard
     "version": "0.1",
     "depends": [
         "base_vat",
+        "l10n_bo",
         "account_accountant",
         "res_company_info_numbers",
         "res_company_invoice_sequence",
