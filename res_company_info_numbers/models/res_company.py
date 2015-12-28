@@ -23,6 +23,7 @@
 ##############################################################################
 
 from openerp import models, fields, api
+from datetime import date, datetime
 
 
 class ResCompany(models.Model):
@@ -38,4 +39,8 @@ class ResCompany(models.Model):
     @api.depends("issuance_deadline")
     def _get_state(self):
         for company in self:
-            company.state = False
+            issuance_deadline = datetime.strptime(company.issuance_deadline, "%Y-%m-%d").date()
+            if issuance_deadline >= date.today():
+                company.state = True
+            else:
+                company.state = False
