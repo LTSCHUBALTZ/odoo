@@ -39,11 +39,56 @@ class AccountInvoice(models.Model):
     final_num = fields.Integer(related="information_company_id.final_num", string="Final Number", readonly=True)
     issuance_deadline = fields.Date(related="information_company_id.issuance_deadline", string="Issuance Deadline", readonly=True)
     account_key = fields.Char(related="information_company_id.account_key", string="Key", readonly=True)
-    control_code = fields.Char(compute="_get_control_code", string="Control Code", readonly=True)
+    control_code = fields.Char(compute="_compute_control_code", string="Control Code", readonly=True, store=True)
 
-    @api.depends("vat")
-    def _get_control_code(self):
+    @api.depends('date_invoice', 'invoice_control_number')
+    def _compute_control_code(self):
         for invoice in self:
-            qr = oso.CodigoControlV7()
-            invoice.control_code = qr.generar(self.authorization_num, 32423, 1665979, 20080519, 35959, "zZ7Z]xssKqkEf_6K9uH(EcV+%x+u[Cca9T%+_$kiLjT8(zr3T9b5Fx2xG-D+_EBS")
-            # invoice.control_code = qr.generar(self.authorization_num, self.number, self.partner_id.vat, self.date_invoice, self.amount_total, self.information_company_id.account_key)
+            if invoice.date_invoice and invoice.invoice_control_number:
+                invoice_control_number = "".join([x for x in invoice.invoice_control_number if x.isdigit()])
+                vat = "".join([x for x in invoice.partner_id.vat if x.isdigit()]) if invoice.partner_id.vat else 0
+                date_invoice = "".join([x for x in invoice.date_invoice if x.isdigit()])
+                qr = oso.CodigoControlV7()
+                invoice.control_code = qr.generar(invoice.authorization_num, int(invoice_control_number), int(vat), int(date_invoice), int(invoice.amount_total), invoice.information_company_id.account_key)
+
+    @api.onchange('authorization_num')
+    def _verify_authorization_num(self):
+        for invoice in self:
+            if not invoice.authorization_num:
+                return {
+                    'warning': {
+                        'title': "Incorrect 'Authorization Number' value",
+                        'message': "The record is empty, check the settings of the company",
+                    }
+                }
+
+    @api.onchange('vat')
+    def _verify_vat(self):
+        for invoice in self:
+            if invoice.vat:
+                check_vat = "".join([x for x in self.vat if x.isdigit()]) if self.vat else False
+                if check_vat.isalpha():
+                    return {
+                        'warning': {
+                            'title': "Incorrect 'Vat' value",
+                            'message': "The record is formatted incorrectly",
+                        }
+                    }
+            else:
+                return {
+                    'warning': {
+                        'title': "Incorrect 'Vat' value",
+                        'message': "The record is empty",
+                    }
+                }
+
+    @api.onchange('account_key')
+    def _verify_account_key(self):
+        for invoice in self:
+            if not invoice.account_key:
+                return {
+                    'warning': {
+                        'title': "Incorrect 'Key' value",
+                        'message': "The record  is empty, check the settings of the company in the field Key",
+                    }
+                }
