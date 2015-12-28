@@ -155,14 +155,3 @@ class CodigoControlV7 (object):
             aux_n += str(verhoeff.get(aux_n))
             c -= 1                       
         return aux_n
-
-#EXAMPLE TEST        
-cc = CodigoControlV7()
-print cc.generar(7904006306693, 876814, 1665979, 20080519, 35959, "zZ7Z]xssKqkEf_6K9uH(EcV+%x+u[Cca9T%+_$kiLjT8(zr3T9b5Fx2xG-D+_EBS")
-print cc.generar(7004002698781, 441147, 1738178, 20070513, 63511, "DhMPHpTME7)iWcxL@Ut){q\ZQxn6vzv8YWu4iXdqGzFL[8qK{bCT#pdbP_S]X7Sk")
-#print cc.generar(20040010113, 665, 1004141023, 20070108, 905, "442F3w5AggG7644D737asd4BH5677sasdL4%44643(3C3674F4")
-#print cc.generar(1904008691195, 978256, 0, 20080201, 26006, "pPgiFS%)v}@N4W3aQqqXCEHVS2[aDw_n%3)pFyU%bEB9)YXt%xNBub4@PZ4S9)ct")
-#print cc.generar(10040010640, 9901, 1035012010, 20070813, 451, "DSrCB7Ssdfv4X29d)5k7N%3ab8p3S(asFG5YU8477SWW)FDAQA")
-#print cc.generar(30040010595, 10015, 953387014, 20070825, 5726, "33E265B43C4435sdTuyBVssD355FC4A6F46sdQWasdA)d56666fDsmp9846636B3")
-
-    
