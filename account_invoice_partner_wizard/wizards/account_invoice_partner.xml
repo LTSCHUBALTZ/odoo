@@ -45,13 +45,13 @@
 
   <record id="action_account_invoice_partner_duplicates" model="ir.actions.act_window">
     <field name="name">Invoices QR Duplicate</field>
-    <field name="res_model">account.invoice.partner.wizard</field>
     <field name="type">ir.actions.act_window</field>
+    <field name="res_model">account.invoice.partner.wizard</field>
     <field name="view_type">form</field>
     <field name="view_mode">form</field>
-    <field name="target">new</field>
     <field name="view_id" ref="account_invoice_partner_wizard_form"/>
     <field name="context">{"duplicate": True}</field>
+    <field name="target">new</field>
   </record>
 
   <record model="ir.values" id="ir_values_account_invoice_partner">
@@ -63,8 +63,9 @@
 
    <record model="ir.values" id="ir_values_account_invoice_partner_duplicates">
     <field name="key2" eval="'client_print_multi'"/>
-    <field name="model" eval="'account.invoice'"/>
     <field name="name">Invoices QR Duplicates</field>
-    <field name="value" eval="'ir.actions.act_window,%d'%action_account_invoice_partner_duplicates"/>
+    <field name="value" eval="'ir.actions.act_window,' +str(ref('action_account_invoice_partner_duplicates'))"/>
+    <field name="key">action</field>
+    <field name="model" eval="'account.invoice'"/>
    </record>
 </odoo>

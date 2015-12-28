@@ -78,4 +78,4 @@ class AccountInvoicePartnerWizard(models.TransientModel):
         data = self.pre_print_report(data)
         data['form'].update(self.read(['information_company_id', 'company_vat', 'company_city', 'company_street', 'company_street2', 'company_website',
             'partner_id', 'partner_vat', 'partner_city', 'partner_street', 'partner_street2', 'partner_website','state'])[0])
-        return self.env['report'].with_context(landscape=True).get_action(self, 'account_invoice_partner_wizard.report_invoices',data=data)
+        return self.env['report'].get_action(self, 'account_invoice_partner_wizard.report_invoices', data=data)
