@@ -38,12 +38,12 @@ Company Invoice Sequence
     "depends": [
         "base",
         "account_accountant",
-	"res_company_info_numbers",
+        "res_company_info_numbers",
     ],
     "data": [
         "views/account_invoice.xml",
-	"views/res_company.xml",
-	"data/ir_sequence.xml",
-	"data/res_company.xml",
+        "views/res_company.xml",
+        "data/ir_sequence.xml",
+        "data/res_company.xml",
     ],
 }
