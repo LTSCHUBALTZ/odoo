@@ -26,7 +26,7 @@
     "summary": """
 """,
     "description": """
-Ricardo Modules to install
+Disprotec SRL Modules to install
     """,
     "author": "Disprotec SRL & Ingenieria Thinkasoft de Venezuela",
     "website": "http://www.disprotec.net",
