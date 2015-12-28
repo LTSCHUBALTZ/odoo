@@ -30,9 +30,10 @@ class AccountInvoice(models.Model):
 
     _inherit = "account.invoice"
 
-    amount_to_text = fields.Char(size=256, string='Amount to Text', help='Amount of the invoice in letter')
+    amount_to_text = fields.Char(compute="_compute_amount_to_text", size=256, string='Amount to Text', help='Amount of the invoice in letter')
 
-    @api.onchange('amount_total')
-    def _onchange_amount_to_text(self):
-        for invoice in self:
-            invoice.amount_to_text = amount_to_text_es_BOL.get_amount_to_text(self, invoice.amount_total, 'es_cheque', invoice.currency_id.name)
+    @api.depends('amount_total')
+    def _compute_amount_to_text(self):
+        if self.amount_total > 0:
+            for invoice in self:
+                invoice.amount_to_text = amount_to_text_es_BOL.get_amount_to_text(self, invoice.amount_total, 'es_cheque', invoice.currency_id.name)
