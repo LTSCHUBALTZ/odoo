@@ -33,8 +33,9 @@ Ricardo Modules to install
     "category": "Accounting & Finance",
     "version": "0.1",
     "depends": [
+        "l10n_bo",
+        "account_invoice_partner_wizard",
         "res_company_info_numbers",
         "res_company_invoice_sequence",
-        "account_invoice_partner_wizard",
     ],
 }
