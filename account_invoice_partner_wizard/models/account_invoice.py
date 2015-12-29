@@ -40,6 +40,7 @@ class AccountInvoice(models.Model):
     issuance_deadline = fields.Date(related="information_company_id.issuance_deadline", string="Issuance Deadline", readonly=True)
     account_key = fields.Char(related="information_company_id.account_key", string="Key", readonly=True)
     control_code = fields.Char(compute="_compute_control_code", string="Control Code", readonly=True, store=True)
+    check_report = fields.Boolean(string="check_report", default=True, copy=False)
 
     @api.depends('date_invoice', 'invoice_control_number')
     def _compute_control_code(self):
@@ -92,3 +93,26 @@ class AccountInvoice(models.Model):
                         'message': "The record  is empty, check the settings of the company in the field Key",
                     }
                 }
+
+    @api.multi
+    def action_invoice_partner_wizard(self):
+        self.ensure_one()
+        self.write({'check_report': True})
+        compose_form = self.env.ref(
+            'account_invoice_partner_wizard.account_invoice_partner_wizard_form',
+            False
+        )
+        ctx = dict(
+            print_report=True,
+        )
+        return {
+            'name': 'Invoices QR',
+            'type': 'ir.actions.act_window',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'account.invoice.partner.wizard',
+            'views': [(compose_form.id, 'form')],
+            'view_id': compose_form.id,
+            'target': 'new',
+            'context': ctx,
+        }

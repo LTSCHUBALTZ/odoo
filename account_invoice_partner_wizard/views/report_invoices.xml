@@ -39,7 +39,7 @@
                         <th class="text-center">Quantity</th>
                         <th class="text-left">Barcode</th>
                         <th class="text-left">Internal Reference</th>
-                        <th class="text-right">Description</th>
+                        <th class="text-center">Description</th>
                         <th class="text-right">Unit Price</th>
                         <th class="text-right">Price</th>
                     </tr>

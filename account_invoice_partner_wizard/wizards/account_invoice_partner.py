@@ -76,6 +76,39 @@ class AccountInvoicePartnerWizard(models.TransientModel):
 
     def _print_report(self, data):
         data = self.pre_print_report(data)
-        data['form'].update(self.read(['information_company_id', 'company_vat', 'company_city', 'company_street', 'company_street2', 'company_website',
-            'partner_id', 'partner_vat', 'partner_city', 'partner_street', 'partner_street2', 'partner_website','state'])[0])
+        data['form'].update(
+            self.read(
+                ['information_company_id', 'company_vat', 'company_city',
+                 'company_street', 'company_street2', 'company_website',
+                 'partner_id', 'partner_vat', 'partner_city', 'partner_street',
+                 'partner_street2', 'partner_website', 'state'
+                 ])[0])
         return self.env['report'].get_action(self, 'account_invoice_partner_wizard.report_invoices', data=data)
+
+    @api.multi
+    def action_invoice_sent(self):
+        """ Open a window to compose an email, with the edi invoice template
+            message loaded by default
+        """
+        self.ensure_one()
+        template = self.env.ref('account.email_template_edi_invoice', False)
+        compose_form = self.env.ref('mail.email_compose_message_wizard_form', False)
+        ctx = dict(
+            default_model='account.invoice',
+            default_res_id=self.id,
+            default_use_template=bool(template),
+            default_template_id=template.id,
+            default_composition_mode='comment',
+            mark_invoice_as_sent=True,
+        )
+        return {
+            'name': 'Compose Email',
+            'type': 'ir.actions.act_window',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'mail.compose.message',
+            'views': [(compose_form.id, 'form')],
+            'view_id': compose_form.id,
+            'target': 'new',
+            'context': ctx,
+        }
