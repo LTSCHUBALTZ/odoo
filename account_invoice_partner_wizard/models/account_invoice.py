@@ -23,6 +23,7 @@
 ##############################################################################
 
 from openerp import models, fields, api
+from datetime import datetime
 import oso
 
 
@@ -50,7 +51,16 @@ class AccountInvoice(models.Model):
                 vat = "".join([x for x in invoice.partner_id.vat if x.isdigit()]) if invoice.partner_id.vat else 0
                 date_invoice = "".join([x for x in invoice.date_invoice if x.isdigit()])
                 qr = oso.CodigoControlV7()
-                invoice.control_code = qr.generar(invoice.authorization_num, int(invoice_control_number), int(vat), int(date_invoice), int(invoice.amount_total), invoice.information_company_id.account_key)
+                control_code = qr.generar(invoice.authorization_num, int(invoice_control_number), int(vat), int(date_invoice), int(invoice.amount_total), invoice.information_company_id.account_key)
+                invoice.control_code = "%s|%s|%s|%s|%s|0|%s|%s|0|0|0|0" % (
+                    invoice.vat,
+                    invoice.invoice_control_number,
+                    invoice.authorization_num,
+                    datetime.strptime(invoice.date_invoice, '%Y-%m-%d').strftime('%m/%d/%Y'),
+                    invoice.amount_total,
+                    control_code,
+                    invoice.partner_id.vat,
+                )
 
     @api.onchange('authorization_num')
     def _verify_authorization_num(self):

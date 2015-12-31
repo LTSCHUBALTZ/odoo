@@ -1,7 +1,7 @@
 <openerp>
     <data>
 	<record id="base.res_partner_2" model="res.partner">
-		<field name="vat">CC4321</field>
+		<field name="vat">4321</field>
         </record>
     </data>
 </openerp>

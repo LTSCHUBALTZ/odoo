@@ -74,17 +74,14 @@
                                 <td class="text-right"><span t-esc="amount_by_group[1]"/></td>
                             </tr>
                         </t>
-                        <tr class="border-black">
-                            <td class="text-left"><span t-field="o.amount_to_text"/></td>
-                            <td><strong>Total</strong></td>
-                            <td class="text-right">
-                                <span t-field="o.amount_total" t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
-                            </td>
-                        </tr>
                     </table>
                 </div>
+                <div class="col-xs-12 border-black" style="clear:both;border-top: 1px solid black;">
+                    <span style="float: left;"><strong>Son: </strong><span t-field="o.amount_to_text"/></span>
+                    <span style="float: right;"><strong>Total: </strong><span t-field="o.amount_total" t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/></span>
+                </div>
             </div>
-
+            <br/><br/>
             <p t-if="o.comment">
                 <strong>Comment:</strong>
                 <span t-field="o.comment"/>
@@ -96,10 +93,13 @@
                 <strong>Fiscal Position Remark:</strong>
                 <span t-field="o.fiscal_position_id.note"/>
             </p>
-            <div>
+            <div >
                 <p class="left-margin-49">Control Code: <span t-field="o.control_code"/></p>
                 <p class="right-margin_49">Issuance Deadline: <span t-field="o.issuance_deadline"/></p>
-            </div> 
+            </div>
+            <div style="float: center;">
+                <img class="style-img" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' %('QR', o.control_code, 600, 600)"/>
+            </div>
         </div>
     </t>
 </template>
@@ -133,11 +133,10 @@
                     <span t-if="o.partner_id.vat">TIN: <span t-field="o.partner_id.vat"/> </span>
                 </div>
                 <div style="float: right;">
-                    <span style="float: left">Customer: </span>
-
-                    <address style="float: left" t-field="o.partner_id"
-                        t-field-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}' />
-                    <span t-if="o.partner_id.vat">TIN: <span t-field="o.partner_id.vat"/></span>
+                    <span style="float: center;" t-if="o.partner_id.vat">TIN: <span t-field="o.partner_id.vat"/></span><br/>
+                    <span style="float: center;" t-if="o.authorization_num">Authorization: <span t-field="o.authorization_num"/></span><br/>
+                    <span style="float: center;" t-if="o.invoice_control_number">Invoice num: <span t-field="o.invoice_control_number"/></span><br/>
+                    <span style="float: center;" t-if="data['state'] is False">Original</span>
                 </div>
                 <div style="margin:0 auto;">
                     <h2 class="text-center">
@@ -151,8 +150,17 @@
                             <span t-if="o.type == 'in_invoice'">Vendor Bill</span>
                         </t>
                         <span t-if="data['state'] is True">Duplicate</span>
-                        <span t-field="o.number"/>
                     </h2>    
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12" style="clear:both;" name="company_address">
+                <div style="float: left">
+                    <span t-if="data['partner_name']">Customer: <span t-raw="data['partner_name']"/> </span>
+                </div>
+                <div style="float: right;">
+                    <span t-if="data['partner_vat']">TIN: <span t-raw="data['partner_vat']"/></span>
                 </div>
             </div>
         </div>
@@ -163,9 +171,6 @@
     <div class="footer">
         <div class="text-center" style="border-top: 1px solid black;">
             <div t-if="o.control_code" class="row" style="clear:both;">
-                <div style="float: left;">
-                    <img class="style-img" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' %('QR', o.control_code, 600, 600)"/>
-                </div>
                 <p t-if="company.custom_footer" style="float: center;"><span t-raw="company.rml_footer"/></p>
             </div>
             <ul class="list-inline">

@@ -48,7 +48,8 @@ Key Features
     "version": "0.1",
     "depends": [
                 "base",
-		"procurement",
+        "procurement",
+        "base_vat",
     ],
     "data": [
         "views/res_company.xml",

@@ -66,8 +66,9 @@ class AccountInvoicePartnerWizard(models.TransientModel):
     company_street2 = fields.Char(related='information_company_id.street2', string=' ', readonly=True)
     company_website = fields.Char(related='information_company_id.website', string=' ', readonly=True)
 
-    partner_id = fields.Many2one('res.partner', required=True, string='Partner', readonly=True, default=_get_partner_id)
-    partner_vat = fields.Char(related='partner_id.vat', string='TIN', readonly=True)
+    partner_id = fields.Many2one('res.partner', required=True, string='Partner', default=_get_partner_id)
+    partner_name = fields.Char(compute='_compute_partner', readonly=False, store=False)
+    partner_vat = fields.Char(compute='_compute_partner', readonly=False, store=False)
     partner_city = fields.Char(related='partner_id.city', string='City', readonly=True)
     partner_street = fields.Char(related='partner_id.street', string='Description', readonly=True)
     partner_street2 = fields.Char(related='partner_id.street2', string=' ', readonly=True)
@@ -80,10 +81,16 @@ class AccountInvoicePartnerWizard(models.TransientModel):
             self.read(
                 ['information_company_id', 'company_vat', 'company_city',
                  'company_street', 'company_street2', 'company_website',
-                 'partner_id', 'partner_vat', 'partner_city', 'partner_street',
+                 'partner_id', 'partner_name', 'partner_vat', 'partner_city', 'partner_street',
                  'partner_street2', 'partner_website', 'state'
                  ])[0])
         return self.env['report'].get_action(self, 'account_invoice_partner_wizard.report_invoices', data=data)
+
+    @api.depends('partner_id')
+    def _compute_partner(self):
+        for partner in self:
+            self.partner_name = partner.partner_id.name
+            self.partner_vat = partner.partner_id.vat
 
     @api.multi
     def action_invoice_sent(self):
@@ -91,16 +98,17 @@ class AccountInvoicePartnerWizard(models.TransientModel):
             message loaded by default
         """
         self.ensure_one()
-        template = self.env.ref('account.email_template_edi_invoice', False)
+        template = self.env.ref('account_invoice_partner_wizard.email_template_edi_invoice_partner', False)
         compose_form = self.env.ref('mail.email_compose_message_wizard_form', False)
         ctx = dict(
-            default_model='account.invoice',
+            default_model='account.invoice.partner.wizard',
             default_res_id=self.id,
             default_use_template=bool(template),
             default_template_id=template.id,
             default_composition_mode='comment',
             mark_invoice_as_sent=True,
         )
+        import pdb; pdb.set_trace()
         return {
             'name': 'Compose Email',
             'type': 'ir.actions.act_window',

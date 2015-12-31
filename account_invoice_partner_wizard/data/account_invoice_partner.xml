@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<odoo>
+        <!--Email template -->
+        <record id="email_template_edi_invoice_partner" model="mail.template">
+            <field name="name">Invoice Qr - Send by Email</field>
+            <field name="model_id" ref="account_invoice_partner_wizard.model_account_invoice_partner_wizard"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="report_template" ref="account_invoices_wizard"/>
+            <field name="report_name">Invoice_${(object.number or '').replace('/','_')}_${object.state == 'draft' and 'draft' or ''}</field>
+        </record>
+</odoo>
