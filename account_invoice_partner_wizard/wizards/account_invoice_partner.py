@@ -26,7 +26,6 @@ from openerp import models, fields, api
 
 
 class AccountInvoicePartnerWizard(models.TransientModel):
-    _inherit = "account.common.account.report"
     _name = 'account.invoice.partner.wizard'
 
     @api.model
@@ -75,9 +74,13 @@ class AccountInvoicePartnerWizard(models.TransientModel):
     partner_website = fields.Char(related='partner_id.website', string=' ', readonly=True)
     state = fields.Boolean(string='Duplicate', default=_get_state, readonly=False, help="")
 
-    def _print_report(self, data):
-        data = self.pre_print_report(data)
-        data['form'].update(
+    @api.multi
+    def print_report(self):
+        invoice = self.env["account.invoice"].browse(self._context.get("active_id"))
+        data = {}
+        data_dict = invoice.read()[0]
+        data["form"] = data_dict
+        data["form"].update(
             self.read(
                 ['information_company_id', 'company_vat', 'company_city',
                  'company_street', 'company_street2', 'company_website',
@@ -108,7 +111,6 @@ class AccountInvoicePartnerWizard(models.TransientModel):
             default_composition_mode='comment',
             mark_invoice_as_sent=True,
         )
-        import pdb; pdb.set_trace()
         return {
             'name': 'Compose Email',
             'type': 'ir.actions.act_window',

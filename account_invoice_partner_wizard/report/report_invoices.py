@@ -36,14 +36,38 @@ class SaleMarginExtended(models.AbstractModel):
 
     @api.multi
     def render_html(self, data):
-        self.model = self.env.context.get('active_model')
-        docs = self.env[self.model].browse(self.env.context.get('active_id'))
-        docargs = {
-            'doc_ids': self.ids,
-            'doc_model': self.model,
-            'data': data['form'],
-            'docs': docs,
-            'time': time,
-            'res_company_wizard': self.env['res.company'].browse(data['form']['information_company_id'][0]),
-        }
-        return self.env['report'].render('account_invoice_partner_wizard.report_invoices', docargs)
+        active_model = self.env.context.get('active_model')
+
+        if active_model == "account.invoice":
+            invoice = self.env[active_model].browse(self.env.context.get('active_id'))
+            docargs = {
+                'doc_ids': [invoice.id],
+                'doc_model': active_model,
+                'data': data['form'],
+                'docs': invoice,
+                'time': time,
+                'res_company_wizard': self.env['res.company'].browse(data['form']['information_company_id'][0]),
+            }
+            return self.env['report'].render('account_invoice_partner_wizard.report_invoices', docargs)
+        if active_model == 'account.invoice.partner.wizard':
+            wizard = self.env[active_model].browse(self.env.context.get('active_id'))
+            invoice_id = self.env.context.get("params").get("id")
+            invoice = self.env["account.invoice"].browse(invoice_id)
+            data = {}
+            data["form"] = invoice.read()[0]
+            data["form"].update(
+                wizard.read(
+                    ['information_company_id', 'company_vat', 'company_city',
+                    'company_street', 'company_street2', 'company_website',
+                    'partner_id', 'partner_name', 'partner_vat', 'partner_city', 'partner_street',
+                    'partner_street2', 'partner_website', 'state'
+                    ])[0])
+            docargs = {
+                'doc_ids': [invoice.id],
+                'doc_model': "account.invoice",
+                'data': data['form'],
+                'docs': invoice,
+                'time': time,
+                'res_company_wizard': self.env['res.company'].browse(data['form']['information_company_id'][0]),
+            }
+            return self.env['report'].render('account_invoice_partner_wizard.report_invoices', docargs)

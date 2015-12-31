@@ -24,14 +24,14 @@
                 <field name="partner_street2"/>
                 <field name="partner_website"/>
             </group>
-          </group>    
+          </group>
           <footer>
-            <button name="check_report" string="Print" type="object" invisible="context.get('print_report')"  default_focus="1" class="oe_highlight"/>
+            <button name="print_report" string="Print" type="object" invisible="context.get('print_report')"  default_focus="1" class="oe_highlight"/>
             <button name="action_invoice_sent" string="Send Email" type="object" invisible="context.get('send_email')" default_focus="1" class="oe_highlight"/>
-            or 
+            or
             <button string="Cancel" class="oe_link" special="cancel" />
           </footer>
-        </form> 
+        </form>
     </field>
   </record>
 
