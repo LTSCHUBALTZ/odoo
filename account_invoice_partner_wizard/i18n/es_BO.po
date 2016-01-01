@@ -209,11 +209,6 @@ msgid "Final Number"
 msgstr "Numero de fin"
 
 #. module: account_invoice_partner_wizard
-#: model:ir.ui.view,arch_db:account_invoice_partner_wizard.account_invoice_partner_form
-msgid "Generate"
-msgstr "Generar"
-
-#. module: account_invoice_partner_wizard
 #: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_account_invoice_partner_wizard_id
 #: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_report_account_invoice_partner_wizard_report_invoices_id
 msgid "ID"
@@ -333,11 +328,6 @@ msgid "Price"
 msgstr "Precio"
 
 #. module: account_invoice_partner_wizard
-#: model:ir.ui.view,arch_db:account_invoice_partner_wizard.account_invoice_partner_wizard_form
-msgid "Print"
-msgstr "Imprimir"
-
-#. module: account_invoice_partner_wizard
 #: model:ir.ui.view,arch_db:account_invoice_partner_wizard.report_invoice_document
 msgid "Quantity"
 msgstr "Cantidad"
@@ -418,3 +408,20 @@ msgstr "o"
 msgid "report.account_invoice_partner_wizard.report_invoices"
 msgstr "report.account_invoice_partner_wizard.report_invoices"
 
+#. module: account_invoice_partner_wizard
+#: model:ir.ui.view,arch_db:account_invoice_partner_wizard.account_invoice_partner_wizard_form
+msgid "Print"
+msgstr "Imprimir"
+
+#. module: account_invoice_partner_wizard
+#: model:ir.ui.view,arch_db:account_invoice_partner_wizard.account_invoice_partner_form
+msgid "Generate"
+msgstr "Generar"
+
+#. module: base
+#: code:addons/base/res/res_company.py:107
+#: model:ir.model.fields,field_description:base.field_res_partner_vat
+#: model:ir.model.fields,field_description:base.field_res_users_vat
+#, python-format
+msgid "TIN"
+msgstr "NIT"
