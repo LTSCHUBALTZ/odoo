@@ -51,7 +51,7 @@ class SaleMarginExtended(models.AbstractModel):
             return self.env['report'].render('account_invoice_partner_wizard.report_invoices', docargs)
         if active_model == 'account.invoice.partner.wizard':
             wizard = self.env[active_model].browse(self.env.context.get('active_id'))
-            invoice_id = self.env.context.get("params").get("id")
+            invoice_id = self.env.context.get("invoice_id")
             invoice = self.env["account.invoice"].browse(invoice_id)
             data = {}
             data["form"] = invoice.read()[0]

@@ -110,6 +110,7 @@ class AccountInvoicePartnerWizard(models.TransientModel):
             default_template_id=template.id,
             default_composition_mode='comment',
             mark_invoice_as_sent=True,
+            invoice_id=self.env.context.get("active_id"),
         )
         return {
             'name': 'Compose Email',
