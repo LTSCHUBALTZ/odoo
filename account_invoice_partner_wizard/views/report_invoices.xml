@@ -8,10 +8,10 @@
                     <strong>Description:</strong>
                     <p t-field="o.name"/>
                 </div>
-                <div class="col-xs-2" t-if="o.date_invoice">
-                    <strong>Invoice Date:</strong>
-                    <p t-field="o.date_invoice"/>
-                </div>
+                <!-- <div class="col-xs-2" t-if="o.date_invoice"> -->
+                <!--     <strong>Invoice Date:</strong> -->
+                <!--     <p t-field="o.date_invoice"/> -->
+                <!-- </div> -->
                 <div class="col-xs-2" t-if="o.date_due and o.type == 'out_invoice' and (o.state == 'open' or o.state == 'paid')">
                     <strong>Due Date:</strong>
                     <p t-field="o.date_due"/>
@@ -37,8 +37,6 @@
                 <thead>
                     <tr>
                         <th class="text-center">Quantity</th>
-                        <th class="text-left">Barcode</th>
-                        <th class="text-left">Internal Reference</th>
                         <th class="text-center">Description</th>
                         <th class="text-right">Unit Price</th>
                         <th class="text-right">Price</th>
@@ -50,8 +48,6 @@
                             <span t-field="l.quantity"/>
                             <span t-field="l.uom_id"  groups="product.group_uom"/>
                         </td>
-                        <td class="text-left"><span t-field="l.product_id.barcode"/></td>
-                        <td class="text-left"><span t-field="l.product_id.default_code"/></td>
                         <td class="text-left"><span t-field="l.name"/></td>
                         <td class="text-right"><span t-field="l.price_unit"/></td>
                         <td class="text-right"><span t-field="l.price_subtotal" t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/></td>
@@ -60,22 +56,6 @@
             </table>
 
             <div class="row">
-                <div class="col-xs-4 pull-right">
-                    <table class="table table-condensed">
-                        <tr class="border-black">
-                            <td><strong>Subtotal</strong></td>
-                            <td class="text-right">
-                                <span t-field="o.amount_untaxed" t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
-                            </td>
-                        </tr>
-                        <t t-foreach="o._get_tax_amount_by_group()" t-as="amount_by_group">
-                            <tr>
-                                <td><span t-esc="amount_by_group[0]"/></td>
-                                <td class="text-right"><span t-esc="amount_by_group[1]"/></td>
-                            </tr>
-                        </t>
-                    </table>
-                </div>
                 <div class="col-xs-12 border-black" style="clear:both;border-top: 1px solid black;">
                     <span style="float: left;"><strong>Son: </strong><span t-field="o.amount_to_text"/></span>
                     <span style="float: right;"><strong>Total: </strong><span t-field="o.amount_total" t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/></span>
@@ -93,12 +73,13 @@
                 <strong>Fiscal Position Remark:</strong>
                 <span t-field="o.fiscal_position_id.note"/>
             </p>
-            <div >
-                <p class="left-margin-49">Control Code: <span t-field="o.control_code"/></p>
-                <p class="right-margin_49">Issuance Deadline: <span t-field="o.issuance_deadline"/></p>
+            <div>
+                <p class="left-margin-49">Control Code: <span t-raw="data['control_code_simple']"/>
+                <br/>
+                Issuance Deadline: <span t-field="o.issuance_deadline"/></p>
             </div>
             <div style="float: center;">
-                <img class="style-img" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' %('QR', o.control_code, 600, 600)"/>
+                <img class="style-img" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' %('QR', data['control_code'], 600, 600)"/>
             </div>
         </div>
     </t>
@@ -128,7 +109,7 @@
         <div class="row">
             <div class="col-xs-12" style="clear:both;" name="company_address">
                 <div style="float: left">
-                    <div style="float: left" t-field="company.partner_id" t-field-options='{"widget": "contact", "fields": ["address", "name"], 
+                    <div style="float: left" t-field="company.partner_id" t-field-options='{"widget": "contact", "fields": ["address", "name"],
                     "no_marker": true}'/>
                 </div>
                 <div style="float: right;">
@@ -149,18 +130,24 @@
                             <span t-if="o.type == 'in_invoice'">Vendor Bill</span>
                         </t>
                         <span t-if="data['state'] is True">Duplicate</span>
-                    </h2>    
+                    </h2>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-xs-12" style="clear:both;" name="company_address">
                 <div style="float: left">
-                    <span t-if="data['partner_name']">Customer: <span t-raw="data['partner_name']"/> </span>
+                    <span t-if="o.date_invoice"><span t-raw="data['date_literal']"/></span>
+                </div>
+                <br/>
+                <div style="float: left">
+                    <span t-if="data['partner_name']">Customer: <span t-raw="data['partner_name']"/></span>
                 </div>
                 <div style="float: right;">
                     <span t-if="data['partner_vat']">TIN: <span t-raw="data['partner_vat']"/></span>
                 </div>
+                <br/>
+                <br/>
             </div>
         </div>
     </div>
@@ -179,7 +166,7 @@
                 <li><span class="topage"/></li>
             </ul>
         </div>
-    </div>      
+    </div>
 </template>
 
 <template id="report_invoices">

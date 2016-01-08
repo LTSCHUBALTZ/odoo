@@ -43,24 +43,40 @@ class AccountInvoice(models.Model):
     control_code = fields.Char(compute="_compute_control_code", string="Control Code", readonly=True, store=True)
     check_report = fields.Boolean(string="check_report", default=True, copy=False)
 
+
+    @api.model
+    def _get_control_code(self, account_key):
+        invoice_control_number = "".join([x for x in self.invoice_control_number if x.isdigit()])
+        vat = "".join([x for x in self.partner_id.vat if x.isdigit()]) if self.partner_id.vat else 0
+        date_invoice = "".join([x for x in self.date_invoice if x.isdigit()])
+        qr = oso.CodigoControlV7()
+        control_code = qr.generar(self.authorization_num, int(invoice_control_number),
+                                  int(vat), int(date_invoice),
+                                  int(self.amount_total),
+                                  account_key)
+        return control_code
+
+    @api.model
+    def _get_control_code_final(self, control_code, vat):
+        control_code_final = "%s|%s|%s|%s|%s|0|%s|%s|0|0|0|0" % (
+            self.vat,
+            self.invoice_control_number,
+            self.authorization_num,
+            datetime.strptime(self.date_invoice, '%Y-%m-%d').strftime('%m/%d/%Y'),
+            self.amount_total,
+            control_code,
+            vat,
+        )
+        return control_code_final
+
     @api.depends('date_invoice', 'invoice_control_number')
     def _compute_control_code(self):
         for invoice in self:
             if invoice.date_invoice and invoice.invoice_control_number:
-                invoice_control_number = "".join([x for x in invoice.invoice_control_number if x.isdigit()])
-                vat = "".join([x for x in invoice.partner_id.vat if x.isdigit()]) if invoice.partner_id.vat else 0
-                date_invoice = "".join([x for x in invoice.date_invoice if x.isdigit()])
-                qr = oso.CodigoControlV7()
-                control_code = qr.generar(invoice.authorization_num, int(invoice_control_number), int(vat), int(date_invoice), int(invoice.amount_total), invoice.information_company_id.account_key)
-                invoice.control_code = "%s|%s|%s|%s|%s|0|%s|%s|0|0|0|0" % (
-                    invoice.vat,
-                    invoice.invoice_control_number,
-                    invoice.authorization_num,
-                    datetime.strptime(invoice.date_invoice, '%Y-%m-%d').strftime('%m/%d/%Y'),
-                    invoice.amount_total,
-                    control_code,
-                    invoice.partner_id.vat,
-                )
+                control_code = invoice._get_control_code(
+                    invoice.information_company_id.account_key)
+                invoice.control_code = invoice._get_control_code_final(
+                    control_code, invoice.partner_id.vat)
 
     @api.onchange('authorization_num')
     def _verify_authorization_num(self):
