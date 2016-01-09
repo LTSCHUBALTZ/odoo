@@ -27,6 +27,7 @@ from openerp import models, fields, api
 
 class AccountInvoicePartnerWizard(models.TransientModel):
     _name = 'account.invoice.partner.wizard'
+    _inherit = ['mail.thread']
 
     @api.model
     def _get_information_company_id(self):
