@@ -67,8 +67,8 @@ class AccountInvoicePartnerWizard(models.TransientModel):
     company_website = fields.Char(related='information_company_id.website', string=' ', readonly=True)
 
     partner_id = fields.Many2one('res.partner', required=True, string='Partner', default=_get_partner_id)
-    partner_name = fields.Char(compute='_compute_partner', readonly=False, store=False)
-    partner_vat = fields.Char(compute='_compute_partner', readonly=False, store=False)
+    partner_name = fields.Char()
+    partner_vat = fields.Char()
     partner_city = fields.Char(related='partner_id.city', string='City', readonly=True)
     partner_street = fields.Char(related='partner_id.street', string='Description', readonly=True)
     partner_street2 = fields.Char(related='partner_id.street2', string=' ', readonly=True)
@@ -90,11 +90,11 @@ class AccountInvoicePartnerWizard(models.TransientModel):
                  ])[0])
         return self.env['report'].get_action(self, 'account_invoice_partner_wizard.report_invoices', data=data)
 
-    @api.depends('partner_id')
-    def _compute_partner(self):
+    @api.onchange('partner_id')
+    def _compute_partner_vat(self):
         for partner in self:
-            self.partner_name = partner.partner_id.name
-            self.partner_vat = partner.partner_id.vat
+            partner.partner_vat = partner.partner_id.vat
+            partner.partner_name = partner.partner_id.name
 
     @api.multi
     def action_invoice_sent(self):
