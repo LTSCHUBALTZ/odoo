@@ -65,6 +65,8 @@ class AccountInvoicePartnerWizard(models.TransientModel):
     company_street = fields.Char(related='information_company_id.street', string='Description', readonly=True)
     company_street2 = fields.Char(related='information_company_id.street2', string=' ', readonly=True)
     company_website = fields.Char(related='information_company_id.website', string=' ', readonly=True)
+    company_authorization = fields.Integer(related='information_company_id.authorization_num',
+                                           string='Authorization Num')
 
     partner_id = fields.Many2one('res.partner', required=True, string='Partner', default=_get_partner_id)
     partner_name = fields.Char()

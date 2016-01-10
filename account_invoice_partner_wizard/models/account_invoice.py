@@ -45,23 +45,23 @@ class AccountInvoice(models.Model):
 
 
     @api.model
-    def _get_control_code(self, account_key, partner_id):
+    def _get_control_code(self, company_id, partner_id):
         invoice_control_number = "".join([x for x in self.invoice_control_number if x.isdigit()])
         vat = "".join([x for x in partner_id.vat if x.isdigit()]) if partner_id.vat else 0
         date_invoice = "".join([x for x in self.date_invoice if x.isdigit()])
         qr = oso.CodigoControlV7()
-        control_code = qr.generar(self.authorization_num, int(invoice_control_number),
+        control_code = qr.generar(company_id.authorization_num, int(invoice_control_number),
                                   int(vat), int(date_invoice),
                                   int(self.amount_total),
-                                  account_key)
+                                  company_id.account_key)
         return control_code
 
     @api.model
-    def _get_control_code_final(self, control_code, vat_company, vat_partner):
+    def _get_control_code_final(self, control_code, company_id, vat_partner):
         control_code_final = "%s|%s|%s|%s|%s|0|%s|%s|0|0|0|0" % (
-            vat_company,
+            company_id.partner_id.vat,
             self.invoice_control_number,
-            self.authorization_num,
+            company_id.authorization_num,
             datetime.strptime(self.date_invoice, '%Y-%m-%d').strftime('%m/%d/%Y'),
             self.amount_total,
             control_code,
@@ -74,11 +74,11 @@ class AccountInvoice(models.Model):
         for invoice in self:
             if invoice.date_invoice and invoice.invoice_control_number:
                 control_code = invoice._get_control_code(
-                    invoice.information_company_id.account_key,
+                    invoice.information_company_id,
                     invoice.partner_id)
                 invoice.control_code = invoice._get_control_code_final(
                     control_code,
-                    invoice.information_company_id.partner_id.vat,
+                    invoice.information_company_id,
                     invoice.partner_id.vat)
 
     @api.onchange('authorization_num')
@@ -126,7 +126,7 @@ class AccountInvoice(models.Model):
     @api.multi
     def action_invoice_partner_wizard(self):
         self.ensure_one()
-        self.write({'check_report': True})
+        self.write({'check_report': False})
         compose_form = self.env.ref(
             'account_invoice_partner_wizard.account_invoice_partner_wizard_form',
             False
