@@ -97,7 +97,7 @@
                     "no_marker": true}'/>
                 </div>
                 <div style="float: right;">
-                    <span style="float: center;" t-if="o.partner_id.vat">TIN: <span t-field="company.partner_id.vat"/></span><br/>
+                    <t t-if="company.partner_id.vat"><span style="float: center;">TIN: <span t-field="company.partner_id.vat"/></span><br/></t>
                     <span style="float: center;" t-if="o.authorization_num">Authorization: <span t-field="o.authorization_num"/></span><br/>
                     <span style="float: center;" t-if="o.invoice_control_number">Invoice num: <span t-field="o.invoice_control_number"/></span><br/>
                     <span style="float: center;" t-if="data['state'] is False">Original</span>
