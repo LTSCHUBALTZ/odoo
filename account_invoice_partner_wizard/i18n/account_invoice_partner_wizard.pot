@@ -1,0 +1,341 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* account_invoice_partner_wizard
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-01-08 04:09+0000\n"
+"PO-Revision-Date: 2016-01-08 04:09+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_invoice_partner_wizard
+#: model:mail.template,body_html:account_invoice_partner_wizard.email_template_edi_invoice_partner
+msgid "\n"
+"<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"    <p>Hello ${object.partner_id.name},</p>\n"
+"    <p>A new invoice is available for you: </p>\n"
+"</div>\n"
+"            "
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:mail.template,subject:account_invoice_partner_wizard.email_template_edi_invoice_partner
+msgid "${object.information_company_id.name|safe} Invoice "
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.ui.view,arch_db:account_invoice_partner_wizard.report_invoice_document
+msgid "<br/>\n"
+"                Issuance Deadline:"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.ui.view,arch_db:account_invoice_partner_wizard.report_invoice_document
+msgid "<strong>Comment:</strong>"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.ui.view,arch_db:account_invoice_partner_wizard.report_invoice_document
+msgid "<strong>Fiscal Position Remark:</strong>"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.ui.view,arch_db:account_invoice_partner_wizard.report_invoice_document
+msgid "<strong>Son: </strong>"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.ui.view,arch_db:account_invoice_partner_wizard.report_invoice_document
+msgid "<strong>Total: </strong>"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_account_invoice_authorization_num
+msgid "Authorization Number"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.ui.view,arch_db:account_invoice_partner_wizard.external_layout_header
+msgid "Authorization:"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.ui.view,arch_db:account_invoice_partner_wizard.account_invoice_partner_wizard_form
+msgid "Cancel"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.ui.view,arch_db:account_invoice_partner_wizard.external_layout_header
+msgid "Cancelled Invoice"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_account_invoice_city
+#: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_account_invoice_partner_wizard_company_city
+#: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_account_invoice_partner_wizard_partner_city
+msgid "City"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_account_invoice_partner_wizard_information_company_id
+msgid "Company"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.ui.view,arch_db:account_invoice_partner_wizard.account_invoice_partner_form
+msgid "Company General Information"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.ui.view,arch_db:account_invoice_partner_wizard.account_invoice_partner_form
+msgid "Company Info"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.ui.view,arch_db:account_invoice_partner_wizard.account_invoice_partner_form
+msgid "Company Numbers"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_account_invoice_control_code
+msgid "Control Code"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.ui.view,arch_db:account_invoice_partner_wizard.report_invoice_document
+msgid "Control Code:"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_account_invoice_partner_wizard_create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_account_invoice_partner_wizard_create_date
+msgid "Created on"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.ui.view,arch_db:account_invoice_partner_wizard.report_invoice_document
+msgid "Customer:"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_account_invoice_partner_wizard_company_street
+#: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_account_invoice_partner_wizard_partner_street
+#: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_account_invoice_street
+#: model:ir.ui.view,arch_db:account_invoice_partner_wizard.report_invoice_document
+msgid "Description"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_account_invoice_partner_wizard_display_name
+#: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_report_account_invoice_partner_wizard_report_invoices_display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.ui.view,arch_db:account_invoice_partner_wizard.external_layout_header
+msgid "Draft Invoice"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_account_invoice_partner_wizard_state
+#: model:ir.ui.view,arch_db:account_invoice_partner_wizard.external_layout_header
+msgid "Duplicate"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_account_invoice_final_num
+msgid "Final Number"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.ui.view,arch_db:account_invoice_partner_wizard.account_invoice_partner_form
+msgid "Generate"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_account_invoice_partner_wizard_id
+#: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_report_account_invoice_partner_wizard_report_invoices_id
+msgid "ID"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.model,name:account_invoice_partner_wizard.model_account_invoice
+#: model:ir.ui.view,arch_db:account_invoice_partner_wizard.external_layout_header
+msgid "Invoice"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.ui.view,arch_db:account_invoice_partner_wizard.external_layout_header
+msgid "Invoice num:"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:mail.template,report_name:account_invoice_partner_wizard.email_template_edi_invoice_partner
+msgid "Invoice_${(object.partner_id.name or '').replace('/','_')}"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.actions.act_window,name:account_invoice_partner_wizard.action_account_invoice_partner
+#: model:ir.actions.report.xml,name:account_invoice_partner_wizard.account_invoices_wizard
+msgid "Invoices QR"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.actions.act_window,name:account_invoice_partner_wizard.action_account_invoice_partner_duplicates
+msgid "Invoices QR Duplicate"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.actions.report.xml,name:account_invoice_partner_wizard.account_invoices_wizard_duplicate
+msgid "Invoices QR Duplicates"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_account_invoice_issuance_deadline
+msgid "Issuance Deadline"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_account_invoice_account_key
+msgid "Key"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_account_invoice_partner_wizard___last_update
+#: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_report_account_invoice_partner_wizard_report_invoices___last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_account_invoice_partner_wizard_write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_account_invoice_partner_wizard_write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.ui.view,arch_db:account_invoice_partner_wizard.external_layout_header
+msgid "Original"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.ui.view,arch_db:account_invoice_partner_wizard.external_layout_header
+msgid "PRO-FORMA"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.ui.view,arch_db:account_invoice_partner_wizard.external_layout_footer
+msgid "Page:"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_account_invoice_partner_wizard_partner_id
+msgid "Partner"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.ui.view,arch_db:account_invoice_partner_wizard.account_invoice_partner_wizard_form
+msgid "Partner Info"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_account_invoice_partner_wizard_partner_name
+msgid "Partner name"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_account_invoice_partner_wizard_partner_vat
+msgid "Partner vat"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.ui.view,arch_db:account_invoice_partner_wizard.report_invoice_document
+msgid "Price"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.ui.view,arch_db:account_invoice_partner_wizard.account_invoice_partner_wizard_form
+msgid "Print"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: view:website:account_invoice_partner_wizard.report_invoice_document
+msgid "Quantity"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.ui.view,arch_db:account_invoice_partner_wizard.external_layout_header
+msgid "Refund"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.ui.view,arch_db:account_invoice_partner_wizard.account_invoice_partner_wizard_form
+msgid "Send Email"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_account_invoice_partner_wizard_company_vat
+#: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_account_invoice_vat
+msgid "TAX ID"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.ui.view,arch_db:account_invoice_partner_wizard.external_layout_header
+#: model:ir.ui.view,arch_db:account_invoice_partner_wizard.report_invoice_document
+msgid "TIN:"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.ui.view,arch_db:account_invoice_partner_wizard.report_invoice_document
+msgid "Unit Price"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.ui.view,arch_db:account_invoice_partner_wizard.external_layout_header
+msgid "Vendor Bill"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.ui.view,arch_db:account_invoice_partner_wizard.external_layout_header
+msgid "Vendor Refund"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.model.fields,help:account_invoice_partner_wizard.field_account_invoice_partner_wizard_partner_website
+msgid "Website of Partner or Company"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.model,name:account_invoice_partner_wizard.model_account_invoice_partner_wizard
+msgid "account.invoice.partner.wizard"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_account_invoice_check_report
+msgid "check_report"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.ui.view,arch_db:account_invoice_partner_wizard.account_invoice_partner_wizard_form
+msgid "or"
+msgstr ""
+
+#. module: account_invoice_partner_wizard
+#: model:ir.model,name:account_invoice_partner_wizard.model_report_account_invoice_partner_wizard_report_invoices
+msgid "report.account_invoice_partner_wizard.report_invoices"
+msgstr ""
+

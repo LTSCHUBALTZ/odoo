@@ -45,9 +45,9 @@ class AccountInvoice(models.Model):
 
 
     @api.model
-    def _get_control_code(self, account_key):
+    def _get_control_code(self, account_key, partner_id):
         invoice_control_number = "".join([x for x in self.invoice_control_number if x.isdigit()])
-        vat = "".join([x for x in self.partner_id.vat if x.isdigit()]) if self.partner_id.vat else 0
+        vat = "".join([x for x in partner_id.vat if x.isdigit()]) if partner_id.vat else 0
         date_invoice = "".join([x for x in self.date_invoice if x.isdigit()])
         qr = oso.CodigoControlV7()
         control_code = qr.generar(self.authorization_num, int(invoice_control_number),
@@ -57,15 +57,15 @@ class AccountInvoice(models.Model):
         return control_code
 
     @api.model
-    def _get_control_code_final(self, control_code, vat):
+    def _get_control_code_final(self, control_code, vat_company, vat_partner):
         control_code_final = "%s|%s|%s|%s|%s|0|%s|%s|0|0|0|0" % (
-            self.vat,
+            vat_company,
             self.invoice_control_number,
             self.authorization_num,
             datetime.strptime(self.date_invoice, '%Y-%m-%d').strftime('%m/%d/%Y'),
             self.amount_total,
             control_code,
-            vat,
+            vat_partner,
         )
         return control_code_final
 
@@ -74,9 +74,12 @@ class AccountInvoice(models.Model):
         for invoice in self:
             if invoice.date_invoice and invoice.invoice_control_number:
                 control_code = invoice._get_control_code(
-                    invoice.information_company_id.account_key)
+                    invoice.information_company_id.account_key,
+                    invoice.partner_id)
                 invoice.control_code = invoice._get_control_code_final(
-                    control_code, invoice.partner_id.vat)
+                    control_code,
+                    invoice.information_company_id.partner_id.vat,
+                    invoice.partner_id.vat)
 
     @api.onchange('authorization_num')
     def _verify_authorization_num(self):
