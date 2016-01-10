@@ -60,7 +60,7 @@
             <div>
                 <p class="left-margin-49">Control Code: <span t-raw="data['control_code_simple']"/>
                 <br/>
-                Issuance Deadline: <span t-field="o.issuance_deadline"/></p>
+                Fecha Limite de Emision: <span t-field="o.issuance_deadline"/></p>
             </div>
             <div style="float: center;">
                 <img class="style-img" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' %('QR', data['control_code'], 600, 600)"/>
