@@ -41,8 +41,13 @@ class AccountInvoice(models.Model):
     issuance_deadline = fields.Date(related="information_company_id.issuance_deadline", string="Issuance Deadline", readonly=True)
     account_key = fields.Char(related="information_company_id.account_key", string="Key", readonly=True)
     control_code = fields.Char(compute="_compute_control_code", string="Control Code", readonly=True, store=True)
-    check_report = fields.Boolean(string="check_report", default=True, copy=False)
+    printed = fields.Boolean(string="The invoice was printed or not", default=False, copy=False)
 
+    wizard_information_company_id = fields.Many2one('res.company', string='Company')
+    wizard_company_authorization = fields.Integer(string='Authorization Num')
+    wizard_partner_id = fields.Many2one('res.partner', string='Partner')
+    wizard_partner_name = fields.Char()
+    wizard_partner_vat = fields.Char()
 
     @api.model
     def _get_control_code(self, company_id, partner_id):
@@ -126,7 +131,6 @@ class AccountInvoice(models.Model):
     @api.multi
     def action_invoice_partner_wizard(self):
         self.ensure_one()
-        self.write({'check_report': False})
         compose_form = self.env.ref(
             'account_invoice_partner_wizard.account_invoice_partner_wizard_form',
             False

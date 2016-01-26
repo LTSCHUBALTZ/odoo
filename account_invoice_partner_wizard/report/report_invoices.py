@@ -43,18 +43,37 @@ class SaleMarginExtended(models.AbstractModel):
                 ['information_company_id', 'company_vat', 'company_city',
                 'company_street', 'company_street2', 'company_website',
                 'partner_id', 'partner_name', 'partner_vat', 'partner_city', 'partner_street',
-                'partner_street2', 'partner_website', 'state'
+                'partner_street2', 'partner_website', 'state',
                 'company_authorization',
                 ])[0])
 
     @api.model
-    def _set_date_literal(self, data):
+    def _set_date_literal(self, lang, data):
         # Literal date
+
         string_date = data["form"].get("date_invoice")
         date = datetime.datetime.strptime(string_date, "%Y-%M-%d")
         position = date.month
-        month = calendar.month_name[position].capitalize()
-        date_final = "%s %s %s" % (date.day, month, date.year)
+        company_city = data["form"].get("company_city")
+
+
+        if lang and lang[0:2] == "es":
+            meses = [
+                "",
+                "Enero", "Febrero", "Marzo",
+                "Abril", "Mayo", "Junio",
+                "Julio", "Agosto",
+                "Septiembre", "Octubre",
+                "Noviembre", "Diciembre"]
+
+            month = meses[position]
+            date_final = "%s, %s de %s de %s" % (
+                company_city, date.day, month, date.year)
+        else:
+            month = calendar.month_name[position].capitalize()
+            date_final = "%s, %s %s, %s" % (
+                company_city, month, date.day, date.year)
+
         data["form"].update({"date_literal": date_final})
 
     @api.model
@@ -82,7 +101,7 @@ class SaleMarginExtended(models.AbstractModel):
                 self.env.context.get('active_ids')[0])
 
             self._update_data_with_wizard(wizard, data)
-            self._set_date_literal(data)
+            self._set_date_literal(wizard.partner_id.lang, data)
             self._set_control_code(wizard, invoice, data)
 
             docargs = {
@@ -103,7 +122,7 @@ class SaleMarginExtended(models.AbstractModel):
             data["form"] = invoice.read()[0]
 
             self._update_data_with_wizard(wizard, data)
-            self._set_date_literal(data)
+            self._set_date_literal(wizard.partner_id.lang, data)
             self._set_control_code(wizard, invoice, data)
 
             docargs = {

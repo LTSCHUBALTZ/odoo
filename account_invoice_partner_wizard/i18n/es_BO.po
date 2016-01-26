@@ -340,7 +340,7 @@ msgstr "Factura rectificativa"
 #. module: account_invoice_partner_wizard
 #: model:ir.ui.view,arch_db:account_invoice_partner_wizard.account_invoice_partner_wizard_form
 msgid "Send Email"
-msgstr "Enviar Email"
+msgstr "Generar"
 
 #. module: account_invoice_partner_wizard
 #: model:ir.model.fields,field_description:account_invoice_partner_wizard.field_account_invoice_partner_wizard_date_from
@@ -425,3 +425,9 @@ msgstr "Generar"
 #, python-format
 msgid "TIN"
 msgstr "NIT"
+
+#. module: account_invoice_partner_wizard
+#: code:addons/account_invoice_partner_wizard/wizards/account_invoice_partner.py:125
+#, python-format
+msgid "This wizard should be closed. If you want print again, close this windows and open again."
+msgstr "Cierra esta ventana para continuar. \nSi deseas re-imprimir la factura, debes abrir nuevamente esta ventana."
