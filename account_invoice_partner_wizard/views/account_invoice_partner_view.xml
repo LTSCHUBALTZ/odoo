@@ -17,14 +17,14 @@
         <field name="inherit_id" ref="account.invoice_form"/>
         <field name="arch" type="xml">
             <xpath expr="//button[@name='invoice_cancel']" position='after'>
-                <field name="printed" invisible="1"/>
-                <button name="action_invoice_partner_wizard" type="object" string="Generate" attrs="{'invisible':['|',('printed','=',True),('state', 'not in', ['open'])]}" class="oe_highlight" groups="base.group_user"/>
+                <field name="check_report" invisible="1"/>
+                <button name="action_invoice_partner_wizard" type="object" string="Generate" attrs="{'invisible':['|',('check_report','=',False),('state', 'not in', ['open'])]}" class="oe_highlight" groups="base.group_user"/>
             </xpath>
             <xpath expr="//page[2]" position='after'>
                 <page string="Company Info">
                     <group>
                         <group string="Company General Information">
-			    <field name="information_company_id"/>
+                <field name="information_company_id"/>
                             <field name="vat"/>
                             <field name="city"/>
                             <field name="street"/>
