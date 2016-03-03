@@ -41,24 +41,18 @@ class AccountInvoice(models.Model):
     issuance_deadline = fields.Date(related="information_company_id.issuance_deadline", string="Issuance Deadline", readonly=True)
     account_key = fields.Char(related="information_company_id.account_key", string="Key", readonly=True)
     control_code = fields.Char(compute="_compute_control_code", string="Control Code", readonly=True, store=True)
-    printed = fields.Boolean(string="The invoice was printed or not", default=False, copy=False)
+    check_report = fields.Boolean(string="check_report", default=True, copy=False)
 
-    wizard_information_company_id = fields.Many2one('res.company', string='Company')
-    wizard_company_authorization = fields.Integer(string='Authorization Num')
-    wizard_partner_id = fields.Many2one('res.partner', string='Partner')
-    wizard_partner_name = fields.Char()
-    wizard_partner_vat = fields.Char()
 
     @api.model
     def _get_control_code(self, company_id, partner_id):
         invoice_control_number = "".join([x for x in self.invoice_control_number if x.isdigit()])
         vat = "".join([x for x in partner_id.vat if x.isdigit()]) if partner_id.vat else 0
         date_invoice = "".join([x for x in self.date_invoice if x.isdigit()])
-
         qr = oso.CodigoControlV7()
         control_code = qr.generar(company_id.authorization_num, int(invoice_control_number),
                                   int(vat), int(date_invoice),
-                                  int(round(self.amount_total)),
+                                  int(round(self.amount_total),
                                   company_id.account_key)
         return control_code
 
@@ -132,6 +126,7 @@ class AccountInvoice(models.Model):
     @api.multi
     def action_invoice_partner_wizard(self):
         self.ensure_one()
+        self.write({'check_report': False})
         compose_form = self.env.ref(
             'account_invoice_partner_wizard.account_invoice_partner_wizard_form',
             False
