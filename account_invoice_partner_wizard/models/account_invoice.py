@@ -54,10 +54,11 @@ class AccountInvoice(models.Model):
         invoice_control_number = "".join([x for x in self.invoice_control_number if x.isdigit()])
         vat = "".join([x for x in partner_id.vat if x.isdigit()]) if partner_id.vat else 0
         date_invoice = "".join([x for x in self.date_invoice if x.isdigit()])
+
         qr = oso.CodigoControlV7()
         control_code = qr.generar(company_id.authorization_num, int(invoice_control_number),
                                   int(vat), int(date_invoice),
-                                  int(self.amount_total),
+                                  int(round(self.amount_total)),
                                   company_id.account_key)
         return control_code
 
