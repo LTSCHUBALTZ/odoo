@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # sphinx build directories
 _build/
 
@@ -32,3 +33,6 @@ install/win32/meta.py
 /man/
 /share/
 /src/
+=======
+*.pyc
+>>>>>>> befb1813bd5fbf895cc27d38736fb38b01200fb4
