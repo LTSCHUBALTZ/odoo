@@ -58,7 +58,7 @@ class AccountInvoice(models.Model):
         qr = oso.CodigoControlV7()
         control_code = qr.generar(company_id.authorization_num, int(invoice_control_number),
                                   int(vat), int(date_invoice),
-                                  int(self.amount_total),
+                                  int(round(self.amount_total)),
                                   company_id.account_key)
         return control_code
 
