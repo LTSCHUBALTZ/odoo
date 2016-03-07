@@ -29,7 +29,8 @@
 import calendar
 import datetime
 import time
-from openerp import api, models
+from openerp import api, models, _
+from openerp.exceptions import UserError
 
 
 class SaleMarginExtended(models.AbstractModel):
@@ -56,7 +57,6 @@ class SaleMarginExtended(models.AbstractModel):
         position = date.month
         company_city = data["form"].get("company_city")
 
-
         if lang and lang[0:2] == "es":
             meses = [
                 "",
@@ -79,6 +79,8 @@ class SaleMarginExtended(models.AbstractModel):
     @api.model
     def _set_control_code(self, wizard, invoice, data):
         # Code
+        if not invoice.invoice_control_number:
+            raise UserError(_('Please define Invoice control number related to this invoice.'))
         control_code_simple = invoice._get_control_code(
             wizard.information_company_id,
             wizard.partner_id)
