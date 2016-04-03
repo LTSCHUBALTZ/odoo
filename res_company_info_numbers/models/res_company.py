@@ -30,7 +30,7 @@ class ResCompany(models.Model):
 
     _inherit = "res.company"
 
-    authorization_num = fields.Integer(string="Authorization Number", size=20, help="")
+    authorization_num = fields.Char(string="Authorization Number", size=20, help="")
     final_num = fields.Integer(string="Final Number", size=10, default=1, help="")
     issuance_deadline = fields.Date(string="Issuance Deadline", size=10, default=fields.Date.context_today, help="")
     account_key = fields.Char(string="Key", size=100, help="")

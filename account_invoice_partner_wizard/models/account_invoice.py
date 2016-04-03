@@ -36,7 +36,7 @@ class AccountInvoice(models.Model):
     street = fields.Char(related="information_company_id.street", string="Description", readonly=True)
     street2 = fields.Char(related="information_company_id.street2", string=" ", readonly=True)
     website = fields.Char(related="information_company_id.website", string=" ", readonly=True)
-    authorization_num = fields.Integer(related="information_company_id.authorization_num", string="Authorization Number", readonly=True)
+    authorization_num = fields.Char(related="information_company_id.authorization_num", size=20, string="Authorization Number", readonly=True)
     final_num = fields.Integer(related="information_company_id.final_num", string="Final Number", readonly=True)
     issuance_deadline = fields.Date(related="information_company_id.issuance_deadline", string="Issuance Deadline", readonly=True)
     account_key = fields.Char(related="information_company_id.account_key", string="Key", readonly=True)
@@ -45,7 +45,7 @@ class AccountInvoice(models.Model):
     email_sent = fields.Boolean(string="The invoice was sent or not", default=False, copy=False)
 
     wizard_information_company_id = fields.Many2one('res.company', string='Company')
-    wizard_company_authorization = fields.Integer(string='Authorization Num')
+    wizard_company_authorization = fields.Char(string='Authorization Num', size=20)
     wizard_partner_id = fields.Many2one('res.partner', string='Partner')
     wizard_partner_name = fields.Char()
     wizard_partner_vat = fields.Char()
