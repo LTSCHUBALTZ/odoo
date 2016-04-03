@@ -53,7 +53,7 @@ class SaleMarginExtended(models.AbstractModel):
         # Literal date
 
         string_date = data["form"].get("date_invoice")
-        date = datetime.datetime.strptime(string_date, "%Y-%M-%d")
+        date = datetime.datetime.strptime(string_date, "%Y-%m-%d").date()
         position = date.month
         company_city = data["form"].get("company_city")
 
