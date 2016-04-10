@@ -45,8 +45,7 @@ class AccountInvoice(models.Model):
     def invoice_validate(self):
         for invoice in self:
             if invoice.information_company_id.sequence_id.id and \
-                invoice.type == "out_invoice":
-                invoice.invoice_control_number = invoice.\
-                information_company_id.sequence_id.next_by_id()
+               invoice.type == "out_invoice":
+                invoice.invoice_control_number = invoice.information_company_id.sequence_id.next_by_id()
 
         return super(AccountInvoice, self).invoice_validate()

@@ -94,14 +94,15 @@ class AccountInvoicePartnerWizard(models.TransientModel):
     printed = fields.Boolean(default=_get_printed,
                              string='The invoice was printed or not')
 
-    information_company_id = fields.Many2one('res.company', required=True, string='Company', readonly=False, default=_get_information_company_id)
+    information_company_id = fields.Many2one('res.company', required=True, string='Company', readonly=False,
+                                             default=_get_information_company_id)
     company_vat = fields.Char(related='information_company_id.vat', string='TAX ID', readonly=True)
     company_city = fields.Char(related='information_company_id.city', string='City', readonly=True)
     company_street = fields.Char(related='information_company_id.street', string='Description', readonly=True)
     company_street2 = fields.Char(related='information_company_id.street2', string=' ', readonly=True)
     company_website = fields.Char(related='information_company_id.website', string=' ', readonly=True)
     company_authorization = fields.Char(default=_get_company_authorization, size=20,
-                                           string='Authorization Num')
+                                        string='Authorization Num')
 
     partner_id = fields.Many2one('res.partner', required=True, string='Partner', default=_get_partner_id)
     partner_name = fields.Char()
@@ -112,14 +113,12 @@ class AccountInvoicePartnerWizard(models.TransientModel):
     partner_website = fields.Char(related='partner_id.website', string=' ', readonly=True)
     state = fields.Boolean(string='Duplicate', default=_get_state, readonly=False, help="")
 
-
     @api.model
     def check_invoice_printed(self, invoice):
         if invoice.printed and not self.printed:
             raise Warning(_("This wizard should be closed. If you want print again, "
                             "close this windows and open again."))
         return True
-
 
     @api.model
     def save_data_of_wizard(self, invoice):

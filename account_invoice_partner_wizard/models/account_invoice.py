@@ -36,9 +36,11 @@ class AccountInvoice(models.Model):
     street = fields.Char(related="information_company_id.street", string="Description", readonly=True)
     street2 = fields.Char(related="information_company_id.street2", string=" ", readonly=True)
     website = fields.Char(related="information_company_id.website", string=" ", readonly=True)
-    authorization_num = fields.Char(related="information_company_id.authorization_num", size=20, string="Authorization Number", readonly=True)
+    authorization_num = fields.Char(related="information_company_id.authorization_num", size=20,
+                                    string="Authorization Number", readonly=True)
     final_num = fields.Integer(related="information_company_id.final_num", string="Final Number", readonly=True)
-    issuance_deadline = fields.Date(related="information_company_id.issuance_deadline", string="Issuance Deadline", readonly=True)
+    issuance_deadline = fields.Date(related="information_company_id.issuance_deadline",
+                                    string="Issuance Deadline", readonly=True)
     account_key = fields.Char(related="information_company_id.account_key", string="Key", readonly=True)
     control_code = fields.Char(compute="_compute_control_code", string="Control Code", readonly=True, store=True)
     printed = fields.Boolean(string="The invoice was printed or not", default=False, copy=False)
@@ -54,6 +56,7 @@ class AccountInvoice(models.Model):
     def _get_control_code(self, company_id, partner_id):
         invoice_control_number = "".join([x for x in self.invoice_control_number if x.isdigit()])
         vat = "".join([x for x in partner_id.vat if x.isdigit()]) if partner_id.vat else 0
+        #date_format = datetime.strptime(self.date_invoice, '%Y-%m-%d').strftime('%d-%m-%Y')
         date_invoice = "".join([x for x in self.date_invoice if x.isdigit()])
         qr = oso.CodigoControlV7()
         control_code = qr.generar(company_id.authorization_num, int(invoice_control_number),
@@ -68,7 +71,7 @@ class AccountInvoice(models.Model):
             company_id.partner_id.vat,
             self.invoice_control_number,
             company_id.authorization_num,
-            datetime.strptime(self.date_invoice, '%Y-%m-%d').strftime('%m/%d/%Y'),
+            datetime.strptime(self.date_invoice, '%Y-%m-%d').strftime('%d/%m/%Y'),
             self.amount_total,
             control_code,
             vat_partner,
