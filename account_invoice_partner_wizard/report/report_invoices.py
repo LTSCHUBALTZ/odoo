@@ -83,12 +83,14 @@ class SaleMarginExtended(models.AbstractModel):
             raise UserError(_('Please define Invoice control number related to this invoice.'))
         control_code_simple = invoice._get_control_code(
             wizard.information_company_id,
-            wizard.partner_id)
+            wizard.partner_id,
+            wizard.company_authorization)
         data["form"].update({"control_code_simple": control_code_simple})
         control_code = invoice._get_control_code_final(
             control_code_simple,
             wizard.information_company_id,
             data["form"].get("partner_vat"),
+            wizard.company_authorization,
         )
         data["form"].update({"control_code": control_code})
 

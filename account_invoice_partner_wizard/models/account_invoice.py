@@ -53,24 +53,27 @@ class AccountInvoice(models.Model):
     wizard_partner_vat = fields.Char()
 
     @api.model
-    def _get_control_code(self, company_id, partner_id):
+    def _get_control_code(self, company_id, partner_id, authorization_num):
+        if not authorization_num:
+            authorization_num = company_id.authorization_num
         invoice_control_number = "".join([x for x in self.invoice_control_number if x.isdigit()])
         vat = "".join([x for x in partner_id.vat if x.isdigit()]) if partner_id.vat else 0
-        #date_format = datetime.strptime(self.date_invoice, '%Y-%m-%d').strftime('%d-%m-%Y')
         date_invoice = "".join([x for x in self.date_invoice if x.isdigit()])
         qr = oso.CodigoControlV7()
-        control_code = qr.generar(company_id.authorization_num, int(invoice_control_number),
+        control_code = qr.generar(authorization_num, int(invoice_control_number),
                                   int(vat), int(date_invoice),
                                   int(round(self.amount_total)),
                                   company_id.account_key)
         return control_code
 
     @api.model
-    def _get_control_code_final(self, control_code, company_id, vat_partner):
+    def _get_control_code_final(self, control_code, company_id, vat_partner, authorization_num):
+        if not authorization_num:
+            authorization_num = company_id.authorization_num
         control_code_final = "%s|%s|%s|%s|%s|0|%s|%s|0|0|0|0" % (
             company_id.partner_id.vat,
             self.invoice_control_number,
-            company_id.authorization_num,
+            authorization_num,
             datetime.strptime(self.date_invoice, '%Y-%m-%d').strftime('%d/%m/%Y'),
             self.amount_total,
             control_code,
@@ -84,11 +87,13 @@ class AccountInvoice(models.Model):
             if invoice.date_invoice and invoice.invoice_control_number:
                 control_code = invoice._get_control_code(
                     invoice.information_company_id,
-                    invoice.partner_id)
+                    invoice.partner_id,
+                    False)
                 invoice.control_code = invoice._get_control_code_final(
                     control_code,
                     invoice.information_company_id,
-                    invoice.partner_id.vat)
+                    invoice.partner_id.vat,
+                    False)
 
     @api.onchange('authorization_num')
     def _verify_authorization_num(self):
