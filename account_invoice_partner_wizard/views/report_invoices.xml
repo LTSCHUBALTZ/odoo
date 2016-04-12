@@ -98,7 +98,7 @@
                 </div>
                 <div style="float: right;">
                     <t t-if="company.partner_id.vat"><span style="float: center;">TIN: <span t-field="company.partner_id.vat"/></span><br/></t>
-                    <t t-if="company.authorization_num"><span style="float: center;">Authorization: <span t-field="company.authorization_num"/></span><br/></t>
+                    <t t-if="company.authorization_num"><span style="float: center;">Authorization: <span t-raw="data['company_authorization']"/></span><br/></t>
                     <span style="float: center;" t-if="o.invoice_control_number">Invoice num: <span t-field="o.invoice_control_number"/></span><br/>
                     <span style="float: center;" t-if="data['state'] is False">Original</span>
                 </div>
