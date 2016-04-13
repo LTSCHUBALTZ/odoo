@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <openerp>
-    <data>
+    <data noupdate="1">
 
         <record id="sequence_base_company" model="ir.sequence">
             <field name="name">Company Invoice Sequence</field>

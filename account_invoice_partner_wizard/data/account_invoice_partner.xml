@@ -1,5 +1,6 @@
 <?xml version="1.0" ?>
 <odoo>
+    <data noupdate="1">
         <!--Email template -->
         <record id="email_template_edi_invoice_partner" model="mail.template">
             <field name="name">Invoice Qr - Send by Email</field>
@@ -18,4 +19,5 @@
 </div>
             ]]></field>
         </record>
+    </data>
 </odoo>

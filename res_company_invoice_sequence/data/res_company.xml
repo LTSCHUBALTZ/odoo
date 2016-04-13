@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <openerp>
-    <data>
+    <data noupdate="1">
 
         <record id="base.main_company" model="res.company">
             <field name="sequence_id" ref="sequence_base_company"/>
