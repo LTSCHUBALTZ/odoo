@@ -5,9 +5,15 @@
         <field name="model">account.invoice</field>
         <field name="inherit_id" ref="account.invoice_form"/>
         <field name="arch" type="xml">
+            <xpath expr="//button[@name='invoice_cancel']" position='after'>
+                <button name="action_invoice_partner_wizard"
+                    type="object" string="Generate"
+                    attrs="{'invisible':[('state', 'not in', ['open'])]}"
+                    class="oe_highlight" groups="base.group_user"/>
+            </xpath>
             <xpath expr="//field[@name='user_id']" position="after">
-	    	<field name="information_company_id"/>
-	    	<field name="invoice_control_number"/>
+                <field name="information_company_id"/>
+                <field name="invoice_control_number"/>
             </xpath>
         </field>
     </record>

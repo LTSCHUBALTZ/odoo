@@ -14,12 +14,17 @@
     <record model="ir.ui.view" id="account_invoice_partner_form">
         <field name="name">account.invoice.partner.form</field>
         <field name="model">account.invoice</field>
-        <field name="inherit_id" ref="account.invoice_form"/>
+        <field name="inherit_id" ref="res_company_invoice_sequence.invoice_form"/>
         <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_invoice_partner_wizard']" position="replace">
+            </xpath>
             <xpath expr="//button[@name='invoice_cancel']" position='after'>
                 <field name="printed" invisible="1"/>
                 <field name="email_sent" invisible="1"/>
-                <button name="action_invoice_partner_wizard" type="object" string="Generate" attrs="{'invisible':['|',('email_sent','=',True),('state', 'not in', ['open'])]}" class="oe_highlight" groups="base.group_user"/>
+                <button name="action_invoice_partner_wizard" type="object"
+                    string="Generate"
+                    attrs="{'invisible':['|',('email_sent','=',True),('state', 'not in', ['open'])]}"
+                    class="oe_highlight" groups="base.group_user"/>
             </xpath>
             <xpath expr="//page[2]" position='after'>
                 <page string="Company Info">

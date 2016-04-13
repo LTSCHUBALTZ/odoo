@@ -180,6 +180,7 @@ class AccountInvoice(models.Model):
     @api.multi
     def action_invoice_partner_wizard(self):
         self.ensure_one()
+        super(AccountInvoice, self).action_invoice_partner_wizard()
         compose_form = self.env.ref(
             'account_invoice_partner_wizard.account_invoice_partner_wizard_form',
             False
