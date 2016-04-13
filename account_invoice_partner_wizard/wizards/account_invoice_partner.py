@@ -25,6 +25,7 @@
 from openerp import models, fields, api
 from openerp.exceptions import Warning
 from openerp.tools.translate import _
+from openerp.exceptions import UserError
 
 
 class AccountInvoicePartnerWizard(models.TransientModel):
@@ -146,6 +147,8 @@ class AccountInvoicePartnerWizard(models.TransientModel):
             if invoice_id:
                 invoice = invoice_obj.browse(invoice_id)
 
+        if not invoice.invoice_control_number:
+            raise UserError(_('Please Generate Invoice control number.'))
         if self.save_data_of_wizard(invoice):
             self._compute_partner_vat()
             data = {}

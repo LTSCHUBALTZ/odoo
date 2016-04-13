@@ -80,7 +80,7 @@ class SaleMarginExtended(models.AbstractModel):
     def _set_control_code(self, wizard, invoice, data):
         # Code
         if not invoice.invoice_control_number:
-            raise UserError(_('Please define Invoice control number related to this invoice.'))
+            raise UserError(_('Please Generate Invoice control number.'))
         control_code_simple = invoice._get_control_code(
             wizard.information_company_id,
             wizard.partner_id,
