@@ -53,7 +53,13 @@ class AccountInvoice(models.Model):
     wizard_partner_vat = fields.Char()
 
     @api.model
-    def _get_control_code(self, company_id, partner_id, authorization_num):
+    def _get_control_code(self, company_id, partner_id, authorization_num=False):
+        """ Crear un codigo especial de la compañia. Un ejemplo: 55-99-F4-97
+        """
+        # Si no se manda un numero de autorizacion, se utiliza el
+        # numero de autorizacion de la compañia
+        # Cuando no se manda el numero de autorizacion es porque se esta
+        # calculado el codigo para el codigo de control de la factura
         if not authorization_num:
             authorization_num = company_id.authorization_num
         invoice_control_number = "".join([x for x in self.invoice_control_number if x.isdigit()])
@@ -67,9 +73,24 @@ class AccountInvoice(models.Model):
         return control_code
 
     @api.model
-    def _get_control_code_final(self, control_code, company_id, vat_partner, authorization_num):
+    def _get_control_code_final(self, control_code, company_id, vat_partner, authorization_num=False):
+        """ La finalidad de este metodo es crear un codigo de control para la
+        factura. Cuando el codigo QR es escaneado, la informacion mostrada es
+        el codigo de control que se retorna en este metodo. El codigo de
+        control se forma utilizando los parametros recibidos por el método y
+        datos de la factura.
+        Ejemplo que pueda retornar:
+        1234|00004|423423542|08/04/2016|750.0|0|55-99-F4-97|False|0|0|0|0
+        """
+        # Si no se manda un numero de autorizacion, se utiliza el
+        # numero de autorizacion de la compañia, esto es para el campo
+        # de la factura.
+        # Cuando se especifica un numero de autorizacion es porque el
+        # metodo es llamado desde la impresion del reporte, y el código
+        # de control es distinto al de la factura
         if not authorization_num:
             authorization_num = company_id.authorization_num
+
         control_code_final = "%s|%s|%s|%s|%s|0|%s|%s|0|0|0|0" % (
             company_id.partner_id.vat,
             self.invoice_control_number,
@@ -83,20 +104,27 @@ class AccountInvoice(models.Model):
 
     @api.depends('date_invoice', 'invoice_control_number')
     def _compute_control_code(self):
+        """ Re-calcular el codigo de control si algunos de los
+        campos arriba cambia.
+        """
         for invoice in self:
             if invoice.date_invoice and invoice.invoice_control_number:
                 control_code = invoice._get_control_code(
                     invoice.information_company_id,
-                    invoice.partner_id,
-                    False)
+                    invoice.partner_id)
                 invoice.control_code = invoice._get_control_code_final(
                     control_code,
                     invoice.information_company_id,
-                    invoice.partner_id.vat,
-                    False)
+                    invoice.partner_id.vat)
 
     @api.onchange('authorization_num')
     def _verify_authorization_num(self):
+        """ Cuando se selecciona una compañia en la factura.
+        La compañia debe tener los valores establecidos
+        correctamente.
+        La compañia debe tener establecido un numero de autorizacion
+        obligatoriamente.
+        """
         for invoice in self:
             if not invoice.authorization_num:
                 return {
@@ -108,6 +136,12 @@ class AccountInvoice(models.Model):
 
     @api.onchange('vat')
     def _verify_vat(self):
+        """ Cuando se selecciona una compañia en la factura.
+        La compañia debe tener los valores establecidos
+        correctamente.
+        El vat de la empresa debe ser un numero entero
+        obligatoriamente
+        """
         for invoice in self:
             if invoice.vat:
                 check_vat = "".join([x for x in self.vat if x.isdigit()]) if self.vat else False
@@ -128,6 +162,12 @@ class AccountInvoice(models.Model):
 
     @api.onchange('account_key')
     def _verify_account_key(self):
+        """ Cuando se selecciona una compañia en la factura.
+        La compañia debe tener los valores establecidos
+        correctamente.
+        La compañía debe tener establecido un account_key
+        obligatoriamente.
+        """
         for invoice in self:
             if not invoice.account_key:
                 return {
